@@ -4,17 +4,20 @@
     <!--    <meta charset="UTF-8">-->
     <meta charset="UTF-8" language="java" >
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
 <div>
+    <caption>USERS</caption>
     <table border="4" width="75%">
-        <caption>Пользователи</caption>
         <tr>
             <td>Id</td>
-            <td>Name</td>
-            <td>Lastname</td>
+            <td>First Name</td>
+            <td>Last Name</td>
             <td>Age</td>
             <td>Email</td>
+            <td>Role</td>
             <td colspan="2">Action</td>
         </tr>
         <tr th:each="user : ${messages}">
@@ -23,12 +26,13 @@
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getAge()}"></td>
             <td th:text="${user.getEmail()}"></td>
-            <td><a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a></td>
-            <td><a th:href="@{/delete/{id}(id=${user.getId()})}">delete</a></td>
+            <td th:text="${user.getRoleString()}"></td>
+            <td><a th:href ="@{/edit/{id}(id=${user.getId()})}"><button>edit</button></a></td>
+            <td><a th:href="@{/delete/{id}(id=${user.getId()})}"><button>delete</button></a></td>
         </tr>
         <tr>
-            <td colspan="6">
-                <a href="/add"/>Add new user</a></td>
+            <td colspan="8">
+                <a href="/add"/><button>Add new user</button></a></td>
         </tr>
 
     </table>

@@ -4,8 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users1")
@@ -30,24 +29,24 @@ public class User implements UserDetails {
     private String password;
 
     @JoinTable(
-            name="users1_roles"
-            , joinColumns={
-            @JoinColumn(name="users1_id")
+            name = "users1_roles"
+            , joinColumns = {
+            @JoinColumn(name = "users1_id")
     }
-            , inverseJoinColumns={
-            @JoinColumn(name="roles_id")
+            , inverseJoinColumns = {
+            @JoinColumn(name = "roles_id")
     }
     )
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User(String name,String lastName,Byte age,String email,String password,Set<Role>roles) {
+    public User(String name, String lastName, Byte age, String email, String password, Set<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
-        this.roles =roles;
+        this.roles = roles;
     }
 
     public User() {
@@ -100,11 +99,21 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-    @Override
-    public String toString(){
-        return getId()+ getName()+ getLastName()+ getAge()+ getEmail()+ getPassword();
-    }
 
+
+    public String getRoleString() {
+        StringBuilder sb = new StringBuilder();
+        for(Role role :roles) {
+            if (role.getName().equals("ROLE_USER")) {
+              sb.append("USER ");
+            }
+            if (role.getName().equals("ROLE_ADMIN")) {
+                sb.append("ADMIN ");
+            }
+                else sb.append("");
+        }
+        return sb.toString();
+}
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
