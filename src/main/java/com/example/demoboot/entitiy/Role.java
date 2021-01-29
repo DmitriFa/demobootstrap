@@ -16,7 +16,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @Transient
-    @ManyToMany(mappedBy ="roles")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
@@ -56,6 +56,16 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getName();
     }
+    public String RoletoString() {
+        if (getName().equals("ROLE_ADMIN")) {
+            return "ADMIN";
+        }
+        if (getName().equals("ROLE_USER")) {
+            return "USER";
+        }
+        else return "ADMIN USER ";
+    }
+
 }
 
 

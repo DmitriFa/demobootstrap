@@ -1,6 +1,8 @@
 package com.example.demoboot.service;
 
+import com.example.demoboot.entitiy.Role;
 import com.example.demoboot.entitiy.User;
+import com.example.demoboot.repository.RoleRepository;
 import com.example.demoboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,12 +38,6 @@ public class UserService {
     }
 
     public void updateUser(User user)  {
-        List<User> users = getAllUsers();
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getEmail().equals(user.getEmail())) {
-                user.setRoles(users.get(i).getRoles());
-            }
-        }
         if (user.getPassword().length() != 60) {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             userRepository.save(user);
@@ -51,10 +47,10 @@ public class UserService {
         }
     }
 
-
     public List<User> getAllUsers()  {
         return userRepository.findAll();
     }
+
 
     public User getUserById(long id)  {
         User user = null;

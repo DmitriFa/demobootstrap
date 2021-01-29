@@ -6,83 +6,47 @@
     <meta charset="UTF-8"language="java" >
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <style>
+        select {
+            width: 225px; /* Ширина списка в пикселах */
+        }
+    </style>
 </head>
 <body>
-<h4>USERS</h4>
-<style>
-   div.field {
-    padding-bottom: 5px;
-}
-div.field label {
-    display: block;
-    float: left;
-    width: 170px;
-    height: 15px;
-}
-</style>
-<div class="field">
-    <form th:action="@{/add}" th:method="post">
-        <p>Add new user</p>
+<div>
+    <form name="myForm" th:action="@{/add}" th:method="post">
         <tr>
-
-        <div class="field">
-            <label for="name">Name</label>
-            <input name="name" type="text"id="name"required/>
-        </div>
-        <div class="field">
-            <label for="lastName">Last Name</label>
-            <input name="lastName"type="text"id="lastName"required/>
-        </div>
-        <div class="field">
-            <label for="age">Age</label>
-            <input name="age" type="number"id="age"required/>
-        </div>
-        <div class="field">
-            <label for="email">Email</label>
-            <input name="email" type="email"id="email"required/>
-        </div>
-        <div class="field">
-            <label for="password">Password</label>
-            <input name="password"type="password"id="password"required/>
-        </div>
-            <div class="field">
-                <input type="checkbox" name="adminbox"value="1">
-                <input type="hidden" id ="myCheck"  name="adminbox" value="0">
-                <label>ADMIN</label>
+            <div>
+                <h6 align ="center">First Name</h6>
+             <p align ="center"><input align ="center" name="name" type="text"id="name"required/></p>
             </div>
-            <script>
-                function myFunction() {
-                    if (document.getElementById("myCheck").checked) {
-                        document.getElementById("myCheck").value="1";
-                    }
-                    else {
-                        document.getElementById("myCheck").value="0";
-                    }
-                }
-            </script>
-            <div class="field">
-                <input type="checkbox" name="userbox"value="1">
-                <input type="hidden" id ="myCheck1"  name="userbox" value="0">
-                <label>USER</label>
+            <div>
+                <h6 align ="center">Last Name</h6>
+            <p align ="center"><input name="lastName"type="text"id="lastName"required/></p>
             </div>
-            <script>
-                function myFunction1() {
-                    if (document.getElementById("myCheck1").checked) {
-                        document.getElementById("myCheck1").value="1";
-                    }
-                    else {
-                        document.getElementById("myCheck1").value="0";
-                    }
-                }
-            </script>
-
-            <button onclick="myFunction1(),myFunction()" id="myBtn">Add new user</button>
-
-            <!--<input type="submit" value="Add User" onsubmit="myFunction()">-->
+            <div>
+                <h6 align ="center">Age</h6>
+             <p align ="center"><input name="age" type="number"id="age"required/></p>
+            </div>
+            <div >
+                <h6 align ="center">Email</h6>
+             <p align ="center"><input name="email" type="email"id="email"required/></p>
+            </div>
+            <div>
+                <h6 align ="center">Password</h6>
+            <p align ="center"><input name="password"type="password"id="password"required/></p>
+            </div>
+              <div>
+              <p align ="center"><select name="Role"   size ="3" required>
+                       <option value="0">ADMIN</option>
+                       <option value="1">USER</option>
+                       <option value="2"></option>
+                   </select></p>
+            </div>
+            <p align ="center"><button  id="myBtn">Add new user</button></p>
         </tr>
     </form>
-    <a href="/logout"/>Logout</a>
 </div>
+
 </body>
 </html>
