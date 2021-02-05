@@ -1,15 +1,57 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!--    <meta charset="UTF-8">-->
-    <meta charset="UTF-8" language="java" >
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <!doctype html>
+ <html lang="en">
+ <head>
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Latest compiled and minified CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <!-- Optional theme -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+     <!-- Latest compiled and minified JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+     <!-- Bootstrap core CSS -->
+     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Custom styles for this template -->
+     <link href="dashboard.css" rel="stylesheet">
+ </head>
 
-</head>
-<body>
-<div>
-    <table border="4" width="75%">
+ <body>
+ <div class="fixed-top bg-primary" style="background-color:black">
+     <tr>
+     <td>admin@mail.ru</td>
+     <td>with roles:</td>
+     <td>ADMIN USER</td>
+     </tr>
+ </div>
+   <div class= "container-fluid">
+     <div class="row">
+         <div class="col-md-2" style="background-color:white">
+         <div class="card">
+             <div class="card-body">
+                 <nav class="nav flex-column">
+                     <ul class="nav-link active" href="#!">Admin</ul>
+                     <ul class="nav-link active" href="#!">User</ul>
+                 </nav>
+             </div>
+         </div>
+         </div>
+         <div class="col-md-10" style="background-color:whitesmoke">
+         <h2 class="col-md-10">Admin panel</h2>
+         <div class="col-md-10">
+             <ul class="nav nav-tabs" role="tablist">
+             <li class="active"><a href="#mesage" role="tab" data-toggle="tab">Users table</a></li>
+                 <li><a href="/add" role="tab" data-toggle="tab">New User</a></li>
+             </ul>
+             <div class ="card" style="background-color:whitesmoke">
+                 <div class="card-body">
+                     <h4 class="card-title">All users</h4>
+                 </div>
+                            </div>
+
+            <div class="table-responcive" style="background-color:white">
+        <table class="table table-hover ">
         <tr>
             <td>Id</td>
             <td>First Name</td>
@@ -17,24 +59,33 @@
             <td>Age</td>
             <td>Email</td>
             <td>Role</td>
-            <td colspan="2">Action</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
-        <tr th:each="user : ${messages}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getName()}"></td>
-            <td th:text="${user.getLastName()}"></td>
-            <td th:text="${user.getAge()}"></td>
-            <td th:text="${user.getEmail()}"></td>
-            <td th:text="${user.getRoleString()}"></td>
-            <td><a th:href ="@{/edit/{id}(id=${user.getId()})}"><button>edit</button></a></td>
-            <td><a th:href="@{/delete/{id}(id=${user.getId()})}"><button>delete</button></a></td>
-        </tr>
-        <tr>
+    </tr>
+    <tr th:each="user : ${messages}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getRoleString()}"></td>
+        <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>
+        <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>
+    </tr>
+   <!-- <tr>
             <td colspan="8">
-                <a href="/add"/><button>Add new user</button></a></td>
-        </tr>
+                <a href="/add"/><button class="btn btn-success">Add new user</button></a></td> 
+        </tr> -->
     </table>
-    <a href="/logout"/>Logout</a>
+                <div class="col-md-10" style="background-color:whitesmoke"></div>
+        </div>
+
 </div>
+</div>
+    </div>
+        <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 </body>
 </html>
