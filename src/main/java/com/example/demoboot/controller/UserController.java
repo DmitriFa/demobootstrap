@@ -39,14 +39,26 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/delete/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") int id)  {
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public ModelAndView deleteUser(@ModelAttribute("user")User user)  {
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.getUserById(id);
         userService.removeUser(user);
         modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deletePage(@PathVariable("id") int id,
+                                 @ModelAttribute("messages") String messages) throws Exception {
+        User user = userService.getUserById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("messages", user);
+        modelAndView.setViewName("delete");
+        return modelAndView;
+    }
+
+
+
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView adduser(@ModelAttribute("user") User user,@RequestParam("Role") String[] role )throws Exception{
         ModelAndView modelAndView = new ModelAndView();

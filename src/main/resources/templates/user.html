@@ -9,16 +9,58 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        .flex-cols{
+            min-height: 100rem;
+            background-color:whitesmoke;
+        }
+        .flex-col{
+            min-height: 100rem;
+            background-color:white;
+        }
+
+    </style>
+
 </head>
 <body>
+<div class="fixed-top bg-primary" style="background-color:black">
+    <tr>
+        <td>admin@mail.ru</td>
+        <td>with roles:</td>
+        <td>ADMIN USER</td>
+    </tr>
+</div>
 <div>
+    <div class= "container-fluid">
+        <div class="row">
+            <div class="col-md-2 flex-col" >
+                <div class="conteiner">
+                    <ul class= "nav nav-pills">
+                        <li  class="nav-item">
+                            <a  class="nav-link " href="#!"><h5>User</h5></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-10 flex-cols">
+                <h2 class="col-md-10">User Information-page</h2>
+                <div class="col-md-10">
+                    <div class ="card" style="background-color:whitesmoke">
+                        <div class="card-body">
+                            <h4 class="card-title">About user</h4>
+                        </div>
+                    </div>
+
+                    <div class="table-responcive" style="background-color:white">
     <table class="table table-hover table-bordered table-condensed">
         <tr>
-            <td>Id</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Age</td>
-            <td>Email</td>
+            <td><h5>Id</h5></td>
+            <td><h5>First Name</h5></td>
+            <td><h5>Last Name</h5></td>
+            <td><h5>Age</h5></td>
+            <td><h5>Email</h5></td>
+            <td><h5>Role</h5></td>
         </tr>
         <tr   th:each="user : ${messages}">
             <td th:text="${user.getId()}"></td>
@@ -26,6 +68,7 @@
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getAge()}"></td>
             <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getRoleString()}"></td>
         </tr>
     </table>
 </div>

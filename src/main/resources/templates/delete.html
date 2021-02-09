@@ -11,7 +11,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-   <style>
+    <style>
         select {
             width: 162px; /* Ширина списка в пикселах */
         }
@@ -27,36 +27,35 @@
 </head>
 <body>
 <div class="form-group flex-cols">
-    <p align="center"><b>Edit user</b></p>
-    <form class="form-horizontal" th:action="@{/edit}" th:method="POST">
+    <form class="form-horizontal" th:action="@{/delete}" th:method="POST">
+        <p align="center"><b>Delete user</b></p>
         <tr th:each="user : ${messages}">
-         <p align="center">  <input type="hidden" name="id" th:value="${user.getId()}"/></p>
+            <p align="center">  <input type="hidden" name="id" th:value="${user.getId()}"/></p>
             <h6 align="center">First Name</h6>
-         <p align="center">   <input name="name" type="text" th:value="${user.getName()}"id="name" required/></p>
+            <p align="center">   <input  name="name" type="text" th:value="${user.getName()}"id="name" required/></p>
             <h6 align="center">Last Name</h6>
-         <p align="center"> <input name="lastName"type="text"th:value="${user.getLastName()}"id="lastName" required/></p>
+            <p align="center"> <input name="lastName"type="text"th:value="${user.getLastName()}"id="lastName" required/></p>
             <h6 align="center">Age</h6>
-         <p align="center"> <input name="age" type="number" th:value="${user.getAge()}"id="age"required/></p>
+            <p align="center"> <input name="age" type="number" th:value="${user.getAge()}"id="age"required/></p>
             <h6 align="center">Email</h6>
-         <p align="center"> <input name="email" type="email" th:value="${user.getEmail()}"id="email"required/></p>
+            <p align="center"> <input name="email" type="email" th:value="${user.getEmail()}"id="email"required/></p>
             <h6 align="center">Password</h6>
-         <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" required/></p> 
-                 <div><p align="center">
-                       <select  name="Role" size="3" required>
-                           <option th:value="0">ADMIN</option>
-                           <option th:value="1">USER</option>
-                           <option th:value="2"></option>
-                       </select></p>
+            <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" required/></p>
+            <div><p align="center">
+                <select  name="Role" size="3">
+                    <option th:value="0">ADMIN</option>
+                    <option th:value="1">USER</option>
+                    <option th:value="2"></option>
+                </select></p>
             </div>
             <table align="center">
                 <tr>
-           <td> <a class="btn btn-default" href="/admin"> Close</a></button></td>
-           <td> <input class="btn btn-info" type="submit"  value="Edit"></td>
+                    <td> <a class="btn btn-default" href="/admin"> Close</a></button></td>
+                    <td> <input class="btn btn-danger" type="submit"  value="Delete"></td>
                 </tr>
             </table>
         </tr>
     </form>
-</h4>
 </div>
 </body>
 </html>

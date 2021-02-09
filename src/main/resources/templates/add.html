@@ -15,43 +15,90 @@
         select {
             width: 162px; /* Ширина списка в пикселах */
         }
+        .flex-cols{
+            min-height: 100rem;
+            background-color:whitesmoke;
+        }
+        .flex-col{
+            min-height: 100rem;
+            background-color:white;
+        }
     </style>
 </head>
 <body>
-<div>
-    <form name="myForm" th:action="@{/add}" th:method="post">
-        <tr>
-            <div>
-                <h6 align ="center">First Name</h6>
-             <p align ="center"><input align ="center" name="name" type="text"id="name"required/></p>
-            </div>
-            <div>
-                <h6 align ="center">Last Name</h6>
-            <p align ="center"><input name="lastName"type="text"id="lastName"required/></p>
-            </div>
-            <div>
-                <h6 align ="center">Age</h6>
-             <p align ="center"><input name="age" type="number"id="age"required/></p>
-            </div>
-            <div >
-                <h6 align ="center">Email</h6>
-             <p align ="center"><input name="email" type="email"id="email"required/></p>
-            </div>
-            <div>
-                <h6 align ="center">Password</h6>
-            <p align ="center"><input name="password"type="password"id="password"required/></p>
-            </div>
-              <div>
-              <p align ="center"><select name="Role"   size ="3" required>
-                       <option value="0">ADMIN</option>
-                       <option value="1">USER</option>
-                       <option value="2"></option>
-                   </select></p>
-            </div>
-            <p align ="center"><a href="/add"/><button class="btn btn-success">Add new user</button></a></p>
-        </tr>
-    </form>
+<div class="fixed-top bg-primary" style="background-color:black">
+    <tr>
+        <td>admin@mail.ru</td>
+        <td>with roles:</td>
+        <td>ADMIN USER</td>
+    </tr>
 </div>
+<div class= "container-fluid flex-col">
+    <div class="row" >
+        <div class="col-md-2 flex-col">
+            <div class="conteiner">
+                <ul class= "nav nav-pills">
+                    <li  class="nav-item">
+                        <a  class="nav-link active" href="#!"><h5>Admin</h5></a>
+                        <a  class="nav-link " href="/user"><h5>User</h5></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="col-md-10 flex-cols">
+        <h2 class="col-md-10">Admin panel</h2>
+        <div class="col-md-10">
+            <ul class="nav nav-tabs" role="tablist">
+                <li><a href="/admin" role="tab" data-toggle="tab">Users table</a></li>
+                <li class="active"><a href="#message" role="tab" data-toggle="tab">New User</a></li>
+            </ul>
+            <div class ="card" style="background-color:whitesmoke">
+                <div class="card-body">
+                    <div ><h4>Add new user</h4></div>
+                </div>
+            </div>
+                <div class= "container-fluid">
+                    <div class="row flex-cols">
+                        <div class="col-md-12">
+                            <form name="myForm" th:action="@{/add}" th:method="post">
+                                <tr>
+                                    <div>
+                                        <h6 align ="center">First Name</h6>
+                                        <p align ="center"><input align ="center" name="name" type="text"id="name"required/></p>
+                                    </div>
+                                    <div>
+                                        <h6 align ="center">Last Name</h6>
+                                        <p align ="center"><input name="lastName"type="text"id="lastName"required/></p>
+                                    </div>
+                                    <div>
+                                        <h6 align ="center">Age</h6>
+                                        <p align ="center"><input name="age" type="number"id="age"required/></p>
+                                    </div>
+                                    <div >
+                                        <h6 align ="center">Email</h6>
+                                        <p align ="center"><input name="email" type="email"id="email"required/></p>
+                                    </div>
+                                    <div>
+                                        <h6 align ="center">Password</h6>
+                                        <p align ="center"><input name="password"type="password"id="password"required/></p>
+                                    </div>
+                                    <div>
+                                        <p align ="center"><select name="Role"   size ="3" required>
+                                            <option value="0">ADMIN</option>
+                                            <option value="1">USER</option>
+                                            <option value="2"></option>
+                                        </select></p>
+                                    </div>
+                                    <p align ="center"><a href="/add"/><button class="btn btn-success">Add new user</button></a></p>
+                                </tr>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
 </body>
 </html>
