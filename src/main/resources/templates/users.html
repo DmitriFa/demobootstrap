@@ -38,7 +38,7 @@
  <div class="fixed-top bg-primary" style="background-color:black">
      <tr th:each ="user : ${message}">
          <td th:text="${user.getEmail()}"></td>
-         <td>with Roles:</td>
+         <td>with roles:</td>
          <td th:text="${user.getRoleString()}"></td>
          <td><a href="/logout"/>Logout</a></td>
      </tr>

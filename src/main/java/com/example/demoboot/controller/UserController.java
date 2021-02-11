@@ -34,11 +34,16 @@ public class UserController {
     }
 
     @GetMapping(value = "/add")
-    public ModelAndView addPage() {
+    public String addUser(ModelMap model) throws Exception {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("message", user);
+        return "add";
+    }
+  /*  public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add");
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ModelAndView deleteUser(@ModelAttribute("user")User user)  {
