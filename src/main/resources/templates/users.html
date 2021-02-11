@@ -24,6 +24,10 @@
              min-height: 100rem;
              background-color:white;
          }
+         .btns {
+             min-width: 230px;
+             right: 30px;
+         }
 
      </style>
 
@@ -32,23 +36,19 @@
 
  <body>
  <div class="fixed-top bg-primary" style="background-color:black">
-     <tr>
-         <td>admin@mail.ru</td>
-         <td>with roles:</td>
-         <td>ADMIN USER</td>
+     <tr th:each ="user : ${message}">
+         <td th:text="${user.getEmail()}"></td>
+         <td>with Roles:</td>
+         <td th:text="${user.getRoleString()}"></td>
          <td><a href="/logout"/>Logout</a></td>
      </tr>
  </div>
    <div class= "container-fluid flex-col">
      <div class="row" >
          <div class="col-md-2">
-             <div class="conteiner">
-                 <ul class= "nav nav-pills">
-                     <li  class="nav-item">
-                         <a  class="nav-link active" style="background-color:cornflowerblue" href="#!"><h5>Admin</h5></a>
-                         <a  class="nav-link " href="/user"><h5>User</h5></a>
-                     </li>
-                 </ul>
+             <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                 <a class="btn btns btn-primary"href="#">Admin</a>
+                 <a class="btn btns btn-secondary"href="/user">User</a>
              </div>
          </div>
 

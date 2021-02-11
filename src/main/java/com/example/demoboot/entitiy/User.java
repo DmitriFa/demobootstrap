@@ -1,6 +1,8 @@
 package com.example.demoboot.entitiy;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -114,6 +116,10 @@ public class User implements UserDetails {
         }
         return sb.toString();
 }
+    public String getCurrentUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return  auth.getName() + "with Roles";
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

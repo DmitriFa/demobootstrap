@@ -2,6 +2,7 @@ package com.example.demoboot.controller;
 
 import com.example.demoboot.entitiy.Role;
 import com.example.demoboot.entitiy.User;
+import com.example.demoboot.service.UserDetailsServiceImp;
 import com.example.demoboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -132,6 +133,8 @@ public class UserController {
     @GetMapping(value = "/admin")
     public String showAllUser(ModelMap model) throws Exception {
         model.addAttribute("messages", userService.getAllUsers());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("message", user);
         return "users";
     }
     @GetMapping(value = "/user")

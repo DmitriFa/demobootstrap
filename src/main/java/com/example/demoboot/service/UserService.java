@@ -1,8 +1,7 @@
 package com.example.demoboot.service;
 
-import com.example.demoboot.entitiy.Role;
+
 import com.example.demoboot.entitiy.User;
-import com.example.demoboot.repository.RoleRepository;
 import com.example.demoboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
