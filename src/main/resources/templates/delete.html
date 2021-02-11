@@ -30,7 +30,8 @@
     <form class="form-horizontal" th:action="@{/delete}" th:method="POST">
         <p align="center"><b>Delete user</b></p>
         <tr th:each="user : ${messages}">
-            <p align="center">  <input type="hidden" name="id" th:value="${user.getId()}"/></p>
+            <h6 align="center">Id</h6>
+            <p align="center">  <input type="number" name="id" th:value="${user.getId()}"/></p>
             <h6 align="center">First Name</h6>
             <p align="center">   <input  name="name" type="text" th:value="${user.getName()}"id="name" required/></p>
             <h6 align="center">Last Name</h6>
