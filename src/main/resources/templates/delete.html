@@ -31,19 +31,20 @@
         <p align="center"><b>Delete user</b></p>
         <tr th:each="user : ${messages}">
             <h6 align="center">Id</h6>
-            <p align="center">  <input type="number" name="id" th:value="${user.getId()}"/></p>
+            <p align="center">  <input type="number" name="id" th:value="${user.getId()}"readonly/></p>
             <h6 align="center">First Name</h6>
-            <p align="center">   <input  name="name" type="text" th:value="${user.getName()}"id="name" required/></p>
+            <p align="center">   <input  name="name" type="text" th:value="${user.getName()}"id="name" readonly/></p>
             <h6 align="center">Last Name</h6>
-            <p align="center"> <input name="lastName"type="text"th:value="${user.getLastName()}"id="lastName" required/></p>
+            <p align="center"> <input name="lastName"type="text"th:value="${user.getLastName()}"id="lastName" readonly/></p>
             <h6 align="center">Age</h6>
-            <p align="center"> <input name="age" type="number" th:value="${user.getAge()}"id="age"required/></p>
+            <p align="center"> <input name="age" type="number" th:value="${user.getAge()}"id="age"readonly/></p>
             <h6 align="center">Email</h6>
-            <p align="center"> <input name="email" type="email" th:value="${user.getEmail()}"id="email"required/></p>
+            <p align="center"> <input name="email" type="email" th:value="${user.getEmail()}"id="email" readonly/></p>
             <h6 align="center">Password</h6>
-            <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" required/></p>
+            <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" readonly/></p>
+            <h6 align="center">Role</h6>
             <div><p align="center">
-                <select  name="Role" size="3">
+                <select  name="Role" size="3" readonly>
                     <option th:value="0">ADMIN</option>
                     <option th:value="1">USER</option>
                     <option th:value="2"></option>

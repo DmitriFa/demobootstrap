@@ -120,6 +120,11 @@ public class User implements UserDetails {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return  auth.getName() + "with Roles";
     }
+    public String userToString() {
+        return getId()+" "+getLastName()+ " "+ getName()+ " " + getAge()+ " "+getEmail()+ " "+getRoleString();
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

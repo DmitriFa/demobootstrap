@@ -31,7 +31,11 @@
         <td th:text="${user.getEmail()}"></td>
         <td>with roles:</td>
         <td th:text="${user.getRoleString()}"></td>
-        <td><a href="/logout"/>Logout</a></td>
+        <table align="right">
+            <tr>
+                <td><a href="/logout"/>Logout</a></td>
+            <tr>
+        </table>
     </tr>
 </div>
 <div>

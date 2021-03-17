@@ -31,7 +31,7 @@
     <form class="form-horizontal" th:action="@{/edit}" th:method="POST">
         <tr th:each="user : ${messages}">
             <h6 align="center">Id</h6>
-            <p align="center">  <input type="number" name="id" th:value="${user.getId()}"/></p>
+            <p align="center">  <input type="number" name="id" th:value="${user.getId()}" readonly/></p>
             <h6 align="center">First Name</h6>
          <p align="center">   <input name="name" type="text" th:value="${user.getName()}"id="name" required/></p>
             <h6 align="center">Last Name</h6>
@@ -41,9 +41,10 @@
             <h6 align="center">Email</h6>
          <p align="center"> <input name="email" type="email" th:value="${user.getEmail()}"id="email"required/></p>
             <h6 align="center">Password</h6>
-         <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" required/></p> 
-                 <div><p align="center">
-                       <select  name="Role" size="3" required>
+         <p align="center">  <input name="password"type="password"th:value="${user.getPassword()}"id="password" required/></p>
+            <h6 align="center">Role</h6>
+            <div><p align="center">
+                     <select  name="Role" size="3" required>
                            <option th:value="0">ADMIN</option>
                            <option th:value="1">USER</option>
                            <option th:value="2"></option>

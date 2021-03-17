@@ -1,46 +1,48 @@
- <!doctype html>
- <html lang="en" xmlns:th="http://java.sun.com/jsf/composite">
- <head>
-     <!-- Required meta tags -->
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <!-- Latest compiled and minified CSS -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-     <!-- Optional theme -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-     <!-- Latest compiled and minified JavaScript -->
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-     <!-- Bootstrap core CSS -->
-     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Custom styles for this template -->
-     <link href="dashboard.css" rel="stylesheet">
-     <style>
-         .flex-cols{
-             min-height: 100rem;
-             background-color:whitesmoke;
-         }
-         .flex-col{
-             min-height: 100rem;
-             background-color:white;
-         }
-         .btns {
-             min-width: 230px;
-             right: 30px;
-         }
-
-     </style>
-
-
- </head>
-
- <body>
- <div class="fixed-top bg-primary" style="background-color:black">
+<!doctype html>
+<html lang="en" xmlns:th="http://java.sun.com/jsf/composite">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+<!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="dashboard.css" rel="stylesheet">
+<style>
+.flex-cols{
+min-height: 100rem;
+background-color:whitesmoke;
+}
+.flex-col{
+min-height: 100rem;
+background-color:white;
+}
+.btns {
+min-width: 230px;
+right: 30px;
+}
+select{
+width: 162px;
+}
+</style>
+</head>
+<body>
+<div class="fixed-top bg-primary" style="background-color:black">
      <tr th:each ="user : ${message}">
          <td th:text="${user.getEmail()}"></td>
          <td>with roles:</td>
          <td th:text="${user.getRoleString()}"></td>
+         <table align="right">
+         <tr>
          <td><a href="/logout"/>Logout</a></td>
+         <tr>
+         </table>
      </tr>
  </div>
    <div class= "container-fluid flex-col">
@@ -51,23 +53,21 @@
                  <a class="btn btns btn-secondary"href="/user">User</a>
              </div>
          </div>
-
-         <div class="col-md-10 flex-cols" >
-         <h2 class="col-md-10">Admin panel</h2>
+<div class="col-md-10 flex-cols" >
+         <h2 class="col-md-10 admin">Admin panel</h2>
          <div class="col-md-10">
              <ul class="nav nav-tabs" role="tablist">
              <li class="active"><a href="#mesage" role="tab" data-toggle="tab">Users table</a></li>
-                 <li><a href="/add" role="tab" data-toggle="tab">New User</a></li>
+                 <li><a href="/add" >New User</a></li>
              </ul>
              <div class ="card" style="background-color:whitesmoke">
                  <div class="card-body">
                      <div ><h4>All users</h4></div>
                  </div>
-                            </div>
-
-
-            <div class="table-responcive" style="background-color:white">
-        <table class="table table-hover ">
+            </div>
+         <!--    <p class="privet">Privet</p> -->
+ <div class="table-responcive" style="background-color:white">
+        <table class="table table-hover">
         <tr>
             <td><h5>Id</h5></td>
             <td><h5>First Name</h5></td>
@@ -78,41 +78,128 @@
             <td><h5>Edit</h5></td>
             <td><h5>Delete</h5></td>
         </tr>
-    </tr>
-    <tr th:each="user : ${messages}">
-        <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getName()}"></td>
-        <td th:text="${user.getLastName()}"></td>
-        <td th:text="${user.getAge()}"></td>
-        <td th:text="${user.getEmail()}"></td>
-        <td th:text="${user.getRoleString()}"></td>
+    <tr id="row" th:each="user : ${messages}">
+        <td id="id"th:text="${user.getId()}"></td>
+        <td id="name" th:text="${user.getName()}"></td>
+        <td id="lastname" th:text="${user.getLastName()}"></td>
+        <td id="age"th:text="${user.getAge()}"></td>
+        <td id="email" th:text="${user.getEmail()}"></td>
+        <td id="role"th:text="${user.getRoleString()}"></td>
         <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>
-        <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>
+    <!--   <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>-->
+        <td><button class="btn btn-danger eBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
     </tr>
-   <!-- <tr>
-            <td colspan="8">
-                <a href="/add"/><button class="btn btn-success">Add new user</button></a></td> 
-        </tr> -->
     </table>
-                <a href="/logout"/>Logout</a>
-                <div class= "container">
-                    <div class="row">
-                        <div class="col-md-12" style="background-color:whitesmoke">
-                            <div class="card-body"></div>
-                                <div class="card"></div>
-                                <div class="card-title"><h1></h1>  </div>
+<div id="myModal" class="modal fade" >
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">х</button>
+                <h4 class="modal-title">Delete User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form class="form-horizontal" id="form" th:action="@{/admin}" th:method="POST" >
+                       <tr>
+                            <h6 align="center">Id</h6>
+                            <p align="center">  <input type="number" name="fid" id="fid" readonly/></p>
+                            <h6 align="center"></h6>
+                            <h6 align="center">First Name</h6>
+                            <p align="center" >   <input name="name" type="text" id="fname" readonly/></p>
+                            <h6 align="center">Last Name</h6>
+                            <p align="center"> <input name="lastName"type="text"id="flastname" readonly/></p>
+                            <h6 align="center">Age</h6>
+                            <p align="center"> <input name="age" type="number" id="fage"readonly/></p>
+                            <h6 align="center">Email</h6>
+                            <p align="center"> <input name="email" type="email" id="femail"readonly/></p>
+                        <!--<h6 align="center">Password</h6>
+                            <p align="center">  <input name="password"type="password"id="fpassword" readonly/></p>-->
+                             <h6 align="center">Role</h6>  
+                            <div><p align="center">
+                                <select id="frole" name="Role" size="3" readonly>
+                                    <option id="0" th:value="0">ADMIN</option>
+                                    <option id="1" th:value="1">USER</option>
+                                    <option id="2" th:value="2"></option>
+                                </select></p>
                             </div>
-                        </div>
-                    </div>
+                        </tr>
+                    </form>
                 </div>
-        </div>
-         </div>
-</div>
-</div>
+            </div>
+            <div class="modal-footer">
+                <table align="right">
+                    <tr>
+                        <td> <input class="btn btn-default" type="submit" value="Close" data-dismiss="modal"></td>
+                        <td> <input class="btn btn-danger dBtn" type="submit" id="delete" value="Delete" data-dismiss="modal"></td>
+                        <!-- <td><a class="btn btn-danger" th:href="@{/admin/{id}(id=${user.getId()})}">Delete</a></td>-->
+                        </tr>
+                    </table>
+                </div>
+            </div><!--   <a href="/logout"/>Logout</a>-->
     </div>
-   </div>
-        <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<div class= "container">
+</div><div class="row">
+<div class="col-md-12" style="background-color:whitesmoke">
+<div class="card-body"></div>
+<div class="card"></div>
+<div class="card-title">
+<h1></h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var str;
+        var array = [];
+        var id;
+        $('.eBtn').click(function () {
+          str = $(this).closest('tr').index();
+
+            $('.table tr').each(function () {
+                var array_row = [];
+                $(this).find('td').each(function () {
+                    array_row.push($(this).text());
+                });
+                array.push(array_row);
+            });
+            for (let i = 0; i < array.length; i++) {
+                if (i === str) {
+                    $('p #fid').val(array[str][0]);
+                    $('p #fname').val(array[str][1]);
+                    $('p #flastname').val(array[str][2]);
+                    $('p #fage').val(array[str][3]);
+                    $('p #femail').val(array[str][4]);
+                    id = $('p #fid').val();
+                }
+            }
+        });
+     $('.dBtn').click(function () {
+     $('.table tr').eq(str).remove();
+     $.ajax({
+          type: "POST",
+          url: "/admin",
+          contentType : 'application/json',
+          data : JSON.stringify(id),
+      });
+      });
+
+    });
+
+</script>
+<a href="/admin">Link</a>
 </body>
 </html>

@@ -35,7 +35,11 @@
         <td th:text="${user.getEmail()}"></td>
         <td>with roles:</td>
         <td th:text="${user.getRoleString()}"></td>
-        <td><a href="/logout"/>Logout</a></td>
+        <table align="right">
+            <tr>
+                <td><a href="/logout"/>Logout</a></td>
+            <tr>
+        </table>
     </tr>
 </div>
 <div class= "container-fluid flex-col">
@@ -85,6 +89,7 @@
                                         <p align ="center"><input name="password"type="password"id="password"required/></p>
                                     </div>
                                     <div>
+                                        <h6 align="center">Role</h6>
                                         <p align ="center"><select name="Role"   size ="3" required>
                                             <option value="0">ADMIN</option>
                                             <option value="1">USER</option>
