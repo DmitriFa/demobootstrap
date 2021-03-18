@@ -87,7 +87,7 @@ width: 162px;
         <td id="role"th:text="${user.getRoleString()}"></td>
         <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>
     <!--   <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>-->
-        <td><button class="btn btn-danger eBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
+        <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
     </tr>
     </table>
 <div id="myModal" class="modal fade" >
@@ -161,13 +161,13 @@ width: 162px;
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript">
+    var str;
+    var array = [];
+    var id;
 
     $(document).ready(function() {
-        var str;
-        var array = [];
-        var id;
-        $('.eBtn').click(function () {
-          str = $(this).closest('tr').index();
+        $('.delBtn').click(function () {
+            str = $(this).closest('tr').index();
 
             $('.table tr').each(function () {
                 var array_row = [];
@@ -187,16 +187,22 @@ width: 162px;
                 }
             }
         });
-     $('.dBtn').click(function () {
-     $('.table tr').eq(str).remove();
-     $.ajax({
-          type: "POST",
-          url: "/admin",
-          contentType : 'application/json',
-          data : JSON.stringify(id),
-      });
-      });
+        $('.dBtn').click(function () {
+            $('.table tr').eq(str).remove();
+            /*    $.ajax({
+                    type: "DELETE",
+                    url: "/admin",
+                    contentType: 'application/json',
+                    data: JSON.stringify(id),
+                });*/
 
+            fetch('/admin', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(id)
+            });
+
+        });
     });
 
 </script>

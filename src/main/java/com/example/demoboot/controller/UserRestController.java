@@ -32,7 +32,7 @@ import java.util.List;
         }
         return strings;
     }
-    @PostMapping(value = "/admin")
+    @DeleteMapping(value = "/admin")
     public void deleteUser(@RequestBody int id) {
         User user = userService.getUserById(id);
         userService.removeUser(user);
