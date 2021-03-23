@@ -38,7 +38,7 @@ public class UserController {
         userService.removeUser(user);
        modelAndView.setViewName("users");
       return modelAndView;
-    }*/
+    }
 
     @RequestMapping(value = "/admin/{id}", method = RequestMethod.GET)
     public ModelAndView deletePage(@PathVariable("id") int id) throws Exception {
@@ -47,7 +47,7 @@ public class UserController {
         modelAndView.addObject("messages", user);
         modelAndView.setViewName("users");
         return modelAndView;
-    }
+    }*/
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

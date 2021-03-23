@@ -85,38 +85,38 @@ width: 162px;
         <td id="age"th:text="${user.getAge()}"></td>
         <td id="email" th:text="${user.getEmail()}"></td>
         <td id="role"th:text="${user.getRoleString()}"></td>
-        <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>
-    <!--   <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>-->
+        <!-- <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>-->
+        <td><button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
         <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
     </tr>
     </table>
-<div id="myModal" class="modal fade" >
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal">х</button>
-                <h4 class="modal-title">Delete User</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <form class="form-horizontal" id="form" th:action="@{/admin}" th:method="POST" >
-                       <tr>
-                            <h6 align="center">Id</h6>
-                            <p align="center">  <input type="number" name="fid" id="fid" readonly/></p>
-                            <h6 align="center"></h6>
-                            <h6 align="center">First Name</h6>
-                            <p align="center" >   <input name="name" type="text" id="fname" readonly/></p>
-                            <h6 align="center">Last Name</h6>
-                            <p align="center"> <input name="lastName"type="text"id="flastname" readonly/></p>
-                            <h6 align="center">Age</h6>
-                            <p align="center"> <input name="age" type="number" id="fage"readonly/></p>
-                            <h6 align="center">Email</h6>
-                            <p align="center"> <input name="email" type="email" id="femail"readonly/></p>
-                        <!--<h6 align="center">Password</h6>
-                            <p align="center">  <input name="password"type="password"id="fpassword" readonly/></p>-->
+     <div id="myModal" class="modal fade" >
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">х</button>
+                    <h4 class="modal-title">Delete User</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <form class="form-horizontal" id="form" >
+                           <tr>
+                                <h6 align="center">Id</h6>
+                                <p align="center">  <input type="number" name="fid" id="fid" readonly/></p>
+                                <h6 align="center"></h6>
+                                <h6 align="center">First Name</h6>
+                                <p align="center" >   <input name="name" type="text" id="fname" readonly/></p>
+                                <h6 align="center">Last Name</h6>
+                                <p align="center"> <input name="lastName"type="text"id="flastname" readonly/></p>
+                                <h6 align="center">Age</h6>
+                                <p align="center"> <input name="age" type="number" id="fage"readonly/></p>
+                                <h6 align="center">Email</h6>
+                                <p align="center"> <input name="email" type="email" id="femail"readonly/></p>
+                          <!--  <h6 align="center">Password</h6>
+                                <p align="center">  <input name="password"type="password"id="fpassword" readonly/></p>-->
                              <h6 align="center">Role</h6>  
                             <div><p align="center">
-                                <select id="frole" name="Role" size="3" readonly>
+                                <select class="form-select" id="frole" name="Role" size="3" readonly>
                                     <option id="0" th:value="0">ADMIN</option>
                                     <option id="1" th:value="1">USER</option>
                                     <option id="2" th:value="2"></option>
@@ -131,11 +131,58 @@ width: 162px;
                     <tr>
                         <td> <input class="btn btn-default" type="submit" value="Close" data-dismiss="modal"></td>
                         <td> <input class="btn btn-danger dBtn" type="submit" id="delete" value="Delete" data-dismiss="modal"></td>
-                        <!-- <td><a class="btn btn-danger" th:href="@{/admin/{id}(id=${user.getId()})}">Delete</a></td>-->
                         </tr>
                     </table>
                 </div>
-            </div><!--   <a href="/logout"/>Logout</a>-->
+            </div>
+         </div>
+     </div>
+    <div id="editModal" class="modal fade" >
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">х</button>
+                    <h4 class="modal-title">Edit User</h4>
+                </div>
+                   <div class="modal-body">
+                      <div class="form-group">
+                          <form class="form-horizontal" id="eform"  method="PUT">
+                            <tr>
+                                  <h6 align="center">Id</h6>
+                                  <p align="center">  <input type="number" name="id" id="efid" readonly/></p>
+                                  <h6 align="center"></h6>
+                                  <h6 align="center">First Name</h6>
+                                  <p align="center" >   <input name="name" type="text" id="efname" required/></p>
+                                  <h6 align="center">Last Name</h6>
+                                  <p align="center"> <input name="lastname"type="text"id="eflastname" required/></p>
+                                  <h6 align="center">Age</h6>
+                                  <p align="center"> <input name="age" type="number" id="efage"required/></p>
+                                  <h6 align="center">Email</h6>
+                                  <p align="center"> <input name="email" type="email" id="efemail"required/></p>
+                                  <h6 align="center">Password</h6>
+                                  <p align="center">  <input name="password"type="password"id="efpassword" required/></p>
+                                  <h6 align="center">Role</h6>
+                                  <div><p align="center">
+                                      <select class="form-select" name="Role"  multiple id="efrole" size="3" required>
+                                          <option value="0">ADMIN</option>
+                                          <option value="1">USER</option>
+                                          <option value="2"></option>
+                                      </select></p>
+                                  </div>
+                              </tr>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <table align="right">
+                        <tr>
+                            <td> <input class="btn btn-default" type="submit" value="Close" data-dismiss="modal"></td>
+                            <td> <input class="btn btn-info editBtn" type="submit" id="edit" value="Edit" data-dismiss="modal"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 <div class= "container">
 </div><div class="row">
@@ -164,6 +211,8 @@ width: 162px;
     var str;
     var array = [];
     var id;
+    var  stredit ;
+    var arrayedit = [];
 
     $(document).ready(function() {
         $('.delBtn').click(function () {
@@ -181,7 +230,7 @@ width: 162px;
                     $('p #fid').val(array[str][0]);
                     $('p #fname').val(array[str][1]);
                     $('p #flastname').val(array[str][2]);
-                    $('p #fage').val(array[str][3]);
+                    $('#age').val($('p #fage'));
                     $('p #femail').val(array[str][4]);
                     id = $('p #fid').val();
                 }
@@ -201,8 +250,70 @@ width: 162px;
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(id)
             });
+        });
+
+        $('.edBtn').click(function () {
+            stredit = $(this).closest('tr').index();
+            $('.table tr').each(function () {
+                var array_row = [];
+                $(this).find('td').each(function () {
+                    array_row.push($(this).text());
+                });
+                arrayedit.push(array_row);
+            });
+            for (let i = 0; i < arrayedit.length; i++) {
+                if (i === stredit) {
+                    $('p #efid').val(arrayedit[stredit][0]);
+                    $('p #efname').val(arrayedit[stredit][1]);
+                    $('p #eflastname').val(arrayedit[stredit][2]);
+                    $('p #efage').val(arrayedit[stredit][3]);
+                    $('p #efemail').val(arrayedit[stredit][4]);
+                    $('p #efpassword').val(arrayedit[stredit][5]);
+                }
+            }
+        });
+
+       $('.editBtn').click(function () {
+            $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
+            $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
+            $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
+            $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
+            $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
+          if ( $('#efrole').val(0)){
+              $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
+          }
+            if ( $('#efrole').val(1)){
+                $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+            }
+            if ( $('#efrole').val(2)){
+               $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
+            }
+         //   else{
+           //     $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+          //  }
+
+           var data = JSON.stringify($('#eform').serializeArray());
+           var user = {
+               id: $('#efid').val(),
+               name: $('#efname').val(),
+               lastName: $('#eflastname').val(),
+               age: $('#efage').val(),
+               email: $('#efemail').val(),
+               password: $('#efpassword').val()
+           };
+           var role ={ Role : $('efrole').val} ;
+
+
+
+           fetch('/admin', {
+               method: 'PUT',
+               headers: { 'Content-Type': 'application/json' },
+              // body: $('#editModal form').serialize()
+               body: JSON.stringify(user)
+            });
 
         });
+
     });
 
 </script>
