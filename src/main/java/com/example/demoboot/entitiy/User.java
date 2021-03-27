@@ -10,7 +10,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "users1")
-public class User implements UserDetails {
+public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -161,5 +161,6 @@ public class User implements UserDetails {
     public void setRoles(Set<Role>roles) {
         this.roles = roles;
     }
+
 
 }
