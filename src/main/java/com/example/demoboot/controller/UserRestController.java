@@ -27,18 +27,28 @@ import java.util.*;
 
     @PutMapping(value = "/admin")
     public void editUser(@RequestBody User[] user) {
-        if (user[0].getRoles().size() == 0) {
+      //  if (user[0].getRoles().size() == 0) {
+            user[0].setRoles(user[0].getRoles());
             userService.updateUser(user[0]);
-        } else {
+    /*    }
+        else{
+       // if (user[0].getRoles().size() != 1) {
           Set<Role> roles = userService.getUserById(user[0].getId()).getRoles();
             Set<Role> result = new HashSet<Role>();
             result.addAll(roles);
             result.addAll(user[0].getRoles());
             user[0].setRoles(result);
             userService.updateUser(user[0]);
+        }*/
 
-        }
     }
+    @PostMapping(value = "/admin")
+    public void addUser(@RequestBody User[] user) {
+        //  if (user[0].getRoles().size() == 0) {
+        user[0].setRoles(user[0].getRoles());
+        userService.addUser(user[0]);
+    }
+
 }
 
 
