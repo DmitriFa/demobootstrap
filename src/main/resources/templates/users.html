@@ -86,7 +86,7 @@ width: 162px;
         <td id="email" th:text="${user.getEmail()}"></td>
         <td id="role"th:text="${user.getRoleString()}"></td>
         <!-- <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>-->
-        <td><button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
+        <td><button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
         <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
     </tr>
     </table>
@@ -322,48 +322,9 @@ width: 162px;
         });
 
 
-       $('.editBtn').click(function () {
-
-            $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
-            $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
-            $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
-            $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
-            $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
-
-          if ($('#efrole option:selected').val()==0){
-              $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
-              var  idrole = 1;
-              var  idname = 'ROLE_ADMIN';
-          }
-            if ($('#efrole option:selected').val()==1){
-                $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
-                idrole = 2;
-                idname ='ROLE_USER';
-            }
-             if ( $('#efrole option:selected').val()==2){
-              $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
-           }
-           var  user = [{
-                  id: $('#efid').val(),
-                  name: $('#efname').val(),
-                  lastName: $('#eflastname').val(),
-                  age: $('#efage').val(),
-                  email: $('#efemail').val(),
-                  password: $('#efpassword').val(),
-                  roles : [{
-                      id: idrole,
-                      name: idname
-                  }]
-              }];
-           fetch('/admin', {
-               method: 'PUT',
-               headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify(user)
-            });
-        });
-
        $('.addBtn').click(function (){
            $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+
            var nr = $('#table tr:last').index();
            $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
            $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
@@ -404,15 +365,49 @@ width: 162px;
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify(user)
            });
-           $('.table tr').each(function () {
-               var array_row = [];
-               $(this).find('td').each(function () {
-                   array_row.push($(this).text());
-               });
-               arrayedit.push(array_row);
-           });
-
         });
+
+           $('.editBtn').off('click').click(function () {
+
+               $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
+               $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
+               $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
+               $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
+               $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
+
+               if ($('#efrole option:selected').val() == 0) {
+                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
+                   var idrole = 1;
+                   var idname = 'ROLE_ADMIN';
+               }
+               if ($('#efrole option:selected').val() == 1) {
+                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+                   idrole = 2;
+                   idname = 'ROLE_USER';
+               }
+               if ($('#efrole option:selected').val() == 2) {
+                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
+                  // idrole = 1,2;
+                  // idname = 'ROLE_ADMIN','ROLE_USER';
+               }
+               var user = [{
+                   id: $('#efid').val(),
+                   name: $('#efname').val(),
+                   lastName: $('#eflastname').val(),
+                   age: $('#efage').val(),
+                   email: $('#efemail').val(),
+                   password: $('#efpassword').val(),
+                   roles: [{
+                       id: idrole,
+                       name: idname
+                   }]
+               }];
+               fetch('/admin', {
+                   method: 'PUT',
+                   headers: {'Content-Type': 'application/json'},
+                   body: JSON.stringify(user)
+               });
+           });
     });
 </script>
 <a href="/admin">Link</a>
