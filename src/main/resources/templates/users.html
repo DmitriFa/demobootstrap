@@ -403,6 +403,9 @@ width: 162px;
         });
 
            $('.editBtn').click(function () {
+
+                stredit = $('#table tr:last').index();
+
                $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
                $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
                $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
