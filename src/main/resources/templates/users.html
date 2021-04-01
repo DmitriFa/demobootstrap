@@ -102,21 +102,21 @@ width: 162px;
                         <form class="form-horizontal" id="form" >
                            <tr>
                                 <h6 align="center">Id</h6>
-                                <p align="center">  <input type="number" name="fid" id="fid" readonly/></p>
+                                <p align="center">  <input type="number" name="fid" id="fid" /></p>
                                 <h6 align="center"></h6>
                                 <h6 align="center">First Name</h6>
-                                <p align="center" >   <input name="name" type="text" id="fname" readonly/></p>
+                                <p align="center" >   <input name="name" type="text" id="fname" /></p>
                                 <h6 align="center">Last Name</h6>
-                                <p align="center"> <input name="lastName"type="text"id="flastname" readonly/></p>
+                                <p align="center"> <input name="lastName"type="text"id="flastname" /></p>
                                 <h6 align="center">Age</h6>
-                                <p align="center"> <input name="age" type="number" id="fage"readonly/></p>
+                                <p align="center"> <input name="age" type="number" id="fage"/></p>
                                 <h6 align="center">Email</h6>
-                                <p align="center"> <input name="email" type="email" id="femail"readonly/></p>
+                                <p align="center"> <input name="email" type="email" id="femail"/></p>
                           <!--  <h6 align="center">Password</h6>
                                 <p align="center">  <input name="password"type="password"id="fpassword" readonly/></p>-->
                              <h6 align="center">Role</h6>  
                             <div><p align="center">
-                                <select class="form-select" id="frole" name="Role" size="3" readonly>
+                                <select class="form-select" id="frole" name="Role" size="3" >
                                     <option id="0" th:value="0">ADMIN</option>
                                     <option id="1" th:value="1">USER</option>
                                     <option id="2" th:value="2"></option>
@@ -149,7 +149,7 @@ width: 162px;
                           <form class="form-horizontal" id="eform"  method="PUT">
                             <tr>
                                   <h6 align="center">Id</h6>
-                                  <p align="center">  <input type="number" name="id" id="efid" readonly/></p>
+                                  <p align="center">  <input type="number" name="id" id="efid" required/></p>
                                   <h6 align="center"></h6>
                                   <h6 align="center">First Name</h6>
                                   <p align="center" >   <input name="name" type="text" id="efname" required/></p>
@@ -263,230 +263,233 @@ width: 162px;
 
 
     $(document).ready(function() {
-        $('.delBtn').click(function () {
-            str = $(this).closest('tr').index();
+        $(function() {
+            $(document).on('click', '.delBtn', function () {
+                str = $(this).closest('tr').index();
 
-            $('.table tr').each(function () {
-                var array_row = [];
-                $(this).find('td').each(function () {
-                    array_row.push($(this).text());
+                $('.table tr').each(function () {
+                    var array_row = [];
+                    $(this).find('td').each(function () {
+                        array_row.push($(this).text());
+                    });
+                    array.push(array_row);
                 });
-                array.push(array_row);
-            });
-            for (let i = 0; i < array.length; i++) {
-                if (i === str) {
-                    $('p #fid').val(array[str][0]);
-                    $('p #fname').val(array[str][1]);
-                    $('p #flastname').val(array[str][2]);
-                    $('p #fage').val(array[str][3]);
-                    $('p #femail').val(array[str][4]);
-                    id = $('p #fid').val();
+                for (let i = 0; i < array.length; i++) {
+                    if (i === str) {
+                        $('p #fid').val(array[str][0]);
+                        $('p #fname').val(array[str][1]);
+                        $('p #flastname').val(array[str][2]);
+                        $('p #fage').val(array[str][3]);
+                        $('p #femail').val(array[str][4]);
+                        id = $('p #fid').val();
+                    }
                 }
-            }
-        });
-        $('.dBtn').click(function () {
-            $('.table tr').eq(str).remove();
-            fetch('/admin', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(id)
             });
-        });
-
-        $('.edBtn').click(function () {
-            stredit = $(this).closest('tr').index();
-
-            $('.table tr').each(function () {
-                var array_row = [];
-                $(this).find('td').each(function () {
-                    array_row.push($(this).text());
+            $(document).on('click', '.dBtn', function () {
+                $('.table tr').eq(str).remove();
+                fetch('/admin', {
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(id)
                 });
-                arrayedit.push(array_row);
             });
-            for (let i = 0; i < arrayedit.length; i++) {
-                if (i === stredit) {
-                    $('p #efid').val(arrayedit[stredit][0]);
-                    $('p #efname').val(arrayedit[stredit][1]);
-                    $('p #eflastname').val(arrayedit[stredit][2]);
-                    $('p #efage').val(arrayedit[stredit][3]);
-                    $('p #efemail').val(arrayedit[stredit][4]);
-                    $('p #efpassword').val(arrayedit[stredit][5]);
+
+            $(document).on('click', '.edBtn', function () {
+                stredit = $(this).closest('tr').index();
+
+                $('.table tr').each(function () {
+                    var array_row = [];
+                    $(this).find('td').each(function () {
+                        array_row.push($(this).text());
+                    });
+                    arrayedit.push(array_row);
+                });
+                for (let i = 0; i < arrayedit.length; i++) {
+                    if (i === stredit) {
+                        $('p #efid').val(arrayedit[stredit][0]);
+                        $('p #efname').val(arrayedit[stredit][1]);
+                        $('p #eflastname').val(arrayedit[stredit][2]);
+                        $('p #efage').val(arrayedit[stredit][3]);
+                        $('p #efemail').val(arrayedit[stredit][4]);
+                        $('p #efpassword').val(arrayedit[stredit][5]);
+                    }
                 }
-            }
-        });
+            });
 
 
-       $('.addBtn').click(function (){
-           $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+            $(document).on('click', '.addBtn', function () {
+                $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
 
-           var nr = $('#table tr:last').index();
+                var nr = $('#table tr:last').index();
 
-           $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
-           $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
-           $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
-           $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
-           $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
-           $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
-           $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
+                $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
+                $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
+                $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
+                $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
+                $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
+                $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
+                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
 
-           if ($('#addfrole option:selected').val()==0){
-               $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
-               var  idrole = 1;
-               var  idname = 'ROLE_ADMIN';
-               var  user = [{
-                   id: $('#addfid').val(),
-                   name: $('#addfname').val(),
-                   lastName: $('#addflastname').val(),
-                   age: $('#addfage').val(),
-                   email: $('#addfemail').val(),
-                   password: $('#addfpassword').val(),
-                   roles : [{
-                       id: idrole,
-                       name: idname
-                   }]
-               }];
-               fetch('/admin', {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify(user)
-               });
-           }
-           if ($('#addfrole option:selected').val()==1){
-               $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
-               var idrole = 2;
-               var idname ='ROLE_USER';
-               var  user = [{
-                   id: $('#addfid').val(),
-                   name: $('#addfname').val(),
-                   lastName: $('#addflastname').val(),
-                   age: $('#addfage').val(),
-                   email: $('#addfemail').val(),
-                   password: $('#addfpassword').val(),
-                   roles : [{
-                       id: idrole,
-                       name: idname
-                   }]
-               }];
-               fetch('/admin', {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify(user)
-               });
-           }
-           if ( $('#addfrole option:selected').val()==2) {
-               $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
-               var idrole = 1;
-               var idname = 'ROLE_ADMIN';
-               var idrole1=2;
-               var idname1='ROLE_USER';
-               var user = [{
-                   id: $('#addfid').val(),
-                   name: $('#addfname').val(),
-                   lastName: $('#addflastname').val(),
-                   age: $('#addfage').val(),
-                   email: $('#addfemail').val(),
-                   password: $('#addfpassword').val(),
-                   roles: [{
-                       id: idrole,
-                       name: idname  },
-                       {
-                           id: idrole1,
-                           name: idname1
-                       }]
-               }];
-               fetch('/admin', {
-                   method: 'POST',
-                   headers: {'Content-Type': 'application/json'},
-                   body: JSON.stringify(user)
-               });
-           }
-        });
+                if ($('#addfrole option:selected').val() == 0) {
+                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
+                    var idrole = 1;
+                    var idname = 'ROLE_ADMIN';
+                    var user = [{
+                        id: $('#addfid').val(),
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/admin', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+                if ($('#addfrole option:selected').val() == 1) {
+                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
+                    var idrole = 2;
+                    var idname = 'ROLE_USER';
+                    var user = [{
+                        id: $('#addfid').val(),
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/admin', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+                if ($('#addfrole option:selected').val() == 2) {
+                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
+                    var idrole = 1;
+                    var idname = 'ROLE_ADMIN';
+                    var idrole1 = 2;
+                    var idname1 = 'ROLE_USER';
+                    var user = [{
+                        id: $('#addfid').val(),
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        },
+                            {
+                                id: idrole1,
+                                name: idname1
+                            }]
+                    }];
+                    fetch('/admin', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+            });
 
-           $('.editBtn').click(function () {
+            $(document).on('click', '.editBtn', function () {
 
                 stredit = $('#table tr:last').index();
 
-               $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
-               $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
-               $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
-               $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
-               $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
+                $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
+                $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
+                $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
+                $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
+                $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
 
-               if ($('#efrole option:selected').val() == 0) {
-                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
-                       var idrole = 1;
-                       var idname = 'ADMIN';
-                       var user = [{
-                           id: $('#efid').val(),
-                           name: $('#efname').val(),
-                           lastName: $('#eflastname').val(),
-                           age: $('#efage').val(),
-                           email: $('#efemail').val(),
-                           password: $('#efpassword').val(),
-                           roles: [{
-                               id: idrole,
-                               name: idname
-                           }]
-                       }];
-                       fetch('/admin', {
-                           method: 'PUT',
-                           headers: {'Content-Type': 'application/json'},
-                           body: JSON.stringify(user)
-                       });
-                   }
+                if ($('#efrole option:selected').val() == 0) {
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
+                    var idrole = 1;
+                    var idname = 'ADMIN';
+                    var user = [{
+                        id: $('#efid').val(),
+                        name: $('#efname').val(),
+                        lastName: $('#eflastname').val(),
+                        age: $('#efage').val(),
+                        email: $('#efemail').val(),
+                        password: $('#efpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/admin', {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
 
-               if ($('#efrole option:selected').val() == 1) {
-                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
-                     var idrole = 2;
-                     var   idname = 'USER';
-                     var user = [{
-                       id: $('#efid').val(),
-                       name: $('#efname').val(),
-                       lastName: $('#eflastname').val(),
-                       age: $('#efage').val(),
-                       email: $('#efemail').val(),
-                       password: $('#efpassword').val(),
-                       roles: [{
-                           id: idrole,
-                           name: idname
-                       }]
-                   }];
-                   fetch('/admin', {
-                       method: 'PUT',
-                       headers: {'Content-Type': 'application/json'},
-                       body: JSON.stringify(user)
-                   });
-               }
-               if ($('#efrole option:selected').val() == 2) {
-                   $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
-                           var idrole = 1;
-                           var idname = 'ROLE_ADMIN';
-                           var idrole1=2;
-                           var idname1='ROLE_USER';
-                           var user = [{
-                               id: $('#efid').val(),
-                               name: $('#efname').val(),
-                               lastName: $('#eflastname').val(),
-                               age: $('#efage').val(),
-                               email: $('#efemail').val(),
-                               password: $('#efpassword').val(),
-                               roles: [{
-                                   id: idrole,
-                                   name: idname  },
-                                   {
-                                       id: idrole1,
-                                       name: idname1
-                                   }]
-                           }];
-                           fetch('/admin', {
-                               method: 'PUT',
-                               headers: {'Content-Type': 'application/json'},
-                               body: JSON.stringify(user)
-                           });
-                       }
-           });
+                if ($('#efrole option:selected').val() == 1) {
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+                    var idrole = 2;
+                    var idname = 'USER';
+                    var user = [{
+                        id: $('#efid').val(),
+                        name: $('#efname').val(),
+                        lastName: $('#eflastname').val(),
+                        age: $('#efage').val(),
+                        email: $('#efemail').val(),
+                        password: $('#efpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/admin', {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+                if ($('#efrole option:selected').val() == 2) {
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
+                    var idrole = 1;
+                    var idname = 'ROLE_ADMIN';
+                    var idrole1 = 2;
+                    var idname1 = 'ROLE_USER';
+                    var user = [{
+                        id: $('#efid').val(),
+                        name: $('#efname').val(),
+                        lastName: $('#eflastname').val(),
+                        age: $('#efage').val(),
+                        email: $('#efemail').val(),
+                        password: $('#efpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        },
+                            {
+                                id: idrole1,
+                                name: idname1
+                            }]
+                    }];
+                    fetch('/admin', {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+            });
+        })
     });
 </script>
-<a href="/admin">Link</a>
 </body>
 </html>
