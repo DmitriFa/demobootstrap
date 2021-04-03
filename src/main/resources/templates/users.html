@@ -65,7 +65,6 @@ width: 162px;
                      <div ><h4>All users</h4></div>
                  </div>
             </div>
-         <!--    <p class="privet">Privet</p> -->
  <div class="table-responcive" style="background-color:white">
         <table class="table table-hover" id="table">
         <tr>
@@ -85,7 +84,6 @@ width: 162px;
         <td id="age"th:text="${user.getAge()}"></td>
         <td id="email" th:text="${user.getEmail()}"></td>
         <td id="role"th:text="${user.getRoleString()}"></td>
-        <!-- <td><a class="btn btn-info" th:href ="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>-->
         <td><button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
         <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
     </tr>
@@ -112,14 +110,12 @@ width: 162px;
                                 <p align="center"> <input name="age" type="number" id="fage"/></p>
                                 <h6 align="center">Email</h6>
                                 <p align="center"> <input name="email" type="email" id="femail"/></p>
-                          <!--  <h6 align="center">Password</h6>
-                                <p align="center">  <input name="password"type="password"id="fpassword" readonly/></p>-->
-                             <h6 align="center">Role</h6>  
+                                <h6 align="center">Role</h6>
                             <div><p align="center">
-                                <select class="form-select" id="frole" name="Role" size="3" >
-                                    <option id="0" th:value="0">ADMIN</option>
-                                    <option id="1" th:value="1">USER</option>
-                                    <option id="2" th:value="2"></option>
+                                <select class="form-select" id="frole"  size="3" >
+                                    <option  value="0">ADMIN</option>
+                                    <option  value="1">USER</option>
+                                    <option  value="2"></option>
                                 </select></p>
                             </div>
                         </tr>
@@ -163,7 +159,7 @@ width: 162px;
                                   <p align="center">  <input name="password"type="password"id="efpassword" required/></p>
                                   <h6 align="center">Role</h6>
                                   <div><p align="center">
-                                      <select class="form-select" name="Role"  id="efrole" size="2" required>
+                                      <select class="form-select"   id="efrole" size="3" required>
                                           <option value="0">ADMIN</option>
                                           <option value="1">USER</option>
                                           <option value="2"></option>
@@ -196,7 +192,7 @@ width: 162px;
                          <form class="form-horizontal" id="addform"  method="POST">
                              <tr>
                                  <h6 align="center">Id</h6>
-                                 <p align="center">  <input type="number" name="id" id="addfid" required/></p>
+                                 <p align="center"><input type="number" name="id" id="addfid" required/></p>
                                  <h6 align="center"></h6>
                                  <h6 align="center">First Name</h6>
                                  <p align="center" ><input name="name" type="text" id="addfname" required/></p>
@@ -210,7 +206,7 @@ width: 162px;
                                  <p align="center"><input name="password"type="password"id="addfpassword" required/></p>
                                  <h6 align="center">Role</h6>
                                  <div><p align="center">
-                                     <select class="form-select" name="Role"  id="addfrole" size="2" required>
+                                     <select class="form-select" name="Role"  id="addfrole" size="3" required>
                                          <option value="0">ADMIN</option>
                                          <option value="1">USER</option>
                                          <option value="2"></option>
@@ -261,11 +257,12 @@ width: 162px;
     var  stredit ;
     var arrayedit = [];
 
+    $(function() {
+        $(document).ready(function () {
 
-    $(document).ready(function() {
-        $(function() {
-            $(document).on('click', '.delBtn', function () {
+            $('.delBtn').on('click', function () {
                 str = $(this).closest('tr').index();
+                alert(str);
 
                 $('.table tr').each(function () {
                     var array_row = [];
@@ -285,7 +282,7 @@ width: 162px;
                     }
                 }
             });
-            $(document).on('click', '.dBtn', function () {
+            $('.dBtn').on('click', function () {
                 $('.table tr').eq(str).remove();
                 fetch('/admin', {
                     method: 'DELETE',
@@ -294,8 +291,9 @@ width: 162px;
                 });
             });
 
-            $(document).on('click', '.edBtn', function () {
+            $('.edBtn').on('click', function () {
                 stredit = $(this).closest('tr').index();
+
 
                 $('.table tr').each(function () {
                     var array_row = [];
@@ -317,7 +315,7 @@ width: 162px;
             });
 
 
-            $(document).on('click', '.addBtn', function () {
+            $('.addBtn').on('click', function () {
                 $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
 
                 var nr = $('#table tr:last').index();
@@ -328,7 +326,8 @@ width: 162px;
                 $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
                 $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
                 $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
-                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
+                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));');
+
 
                 if ($('#addfrole option:selected').val() == 0) {
                     $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
@@ -402,11 +401,10 @@ width: 162px;
                         body: JSON.stringify(user)
                     });
                 }
+
             });
 
-            $(document).on('click', '.editBtn', function () {
-
-                stredit = $('#table tr:last').index();
+            $('.editBtn').on('click', function () {
 
                 $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
                 $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
@@ -418,6 +416,7 @@ width: 162px;
                     $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
                     var idrole = 1;
                     var idname = 'ADMIN';
+
                     var user = [{
                         id: $('#efid').val(),
                         name: $('#efname').val(),
@@ -430,7 +429,7 @@ width: 162px;
                             name: idname
                         }]
                     }];
-                    fetch('/admin', {
+                  fetch('/admin', {
                         method: 'PUT',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(user)
@@ -441,6 +440,7 @@ width: 162px;
                     $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
                     var idrole = 2;
                     var idname = 'USER';
+
                     var user = [{
                         id: $('#efid').val(),
                         name: $('#efname').val(),
@@ -465,6 +465,7 @@ width: 162px;
                     var idname = 'ROLE_ADMIN';
                     var idrole1 = 2;
                     var idname1 = 'ROLE_USER';
+
                     var user = [{
                         id: $('#efid').val(),
                         name: $('#efname').val(),
@@ -487,9 +488,12 @@ width: 162px;
                         body: JSON.stringify(user)
                     });
                 }
+
             });
-        })
-    });
+
+        });
+    })
+
 </script>
 </body>
 </html>
