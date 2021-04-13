@@ -189,7 +189,7 @@ width: 162px;
                  </div>
                  <div class="modal-body">
                      <div class="form-group">
-                         <form class="form-horizontal" id="addform"  method="POST">
+                         <form class="form-horizontal" id="addform" action="/admin" method="POST">
                              <tr>
                                  <h6 align="center">Id</h6>
                                  <p align="center"><input type="number" name="id" id="addfid" required/></p>
@@ -262,7 +262,6 @@ width: 162px;
 
             $('.delBtn').on('click', function () {
                 str = $(this).closest('tr').index();
-                alert(str);
 
                 $('.table tr').each(function () {
                     var array_row = [];
@@ -326,9 +325,9 @@ width: 162px;
                 $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
                 $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
                 $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
-                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));');
+                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
 
-
+                 setTimeout(function() {window.location.reload();}, 300);
                 if ($('#addfrole option:selected').val() == 0) {
                     $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
                     var idrole = 1;
@@ -488,7 +487,6 @@ width: 162px;
                         body: JSON.stringify(user)
                     });
                 }
-
             });
 
         });
