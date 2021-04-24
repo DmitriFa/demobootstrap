@@ -26,10 +26,10 @@ public class UserController {
 
 
     @GetMapping(value = "/add")
-    public String addUser(ModelMap model) throws Exception {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("message", user);
-        return "add";
+       public String addUser(ModelMap model) throws Exception {
+       User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       model.addAttribute("message", user);
+       return "add";
     }
 
   /* @RequestMapping(value = "/admin", method = RequestMethod.POST)
@@ -79,6 +79,7 @@ public class UserController {
         return modelAndView;
 
     }
+    /*
 
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -91,7 +92,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editUser(@ModelAttribute("user") User user, @RequestParam("Role") String[] role) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         if ((role.length == 0) && (userService.checkEmail(user.getEmail()) || userService.getUserById(user.getId()).getEmail().equals(user.getEmail()))) {
@@ -117,15 +118,15 @@ public class UserController {
             modelAndView.setViewName("redirect:/edit" + +user.getId());
         }
         return modelAndView;
-    }
+    }*/
 
-    @GetMapping(value = "/admin")
+   @GetMapping(value = "/admin")
     public String showAllUser(ModelMap model) throws Exception {
-        model.addAttribute("messages", userService.getAllUsers());
+   //     model.addAttribute("messages", userService.getAllUsers());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("message", user);
-        //  model.addAttribute("msg",userService.getUserById(id));
-        return "users";
+       // model.addAttribute("msg",userService.getUserById(id));
+       return "users";
     }
 
     @GetMapping(value = "/user")

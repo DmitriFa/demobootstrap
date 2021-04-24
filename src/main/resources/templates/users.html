@@ -30,6 +30,9 @@ right: 30px;
 select{
 width: 162px;
 }
+
+
+
 </style>
 </head>
 <body>
@@ -58,36 +61,41 @@ width: 162px;
          <div class="col-md-10">
              <ul class="nav nav-tabs" role="tablist">
              <li class="active"><a href="#mesage" role="tab" data-toggle="tab">Users table</a></li>
-                 <li><a data-toggle="modal" data-target="#addModal">New User</a></li>
+             <!--    <li><a data-toggle="modal" data-target="#addModal">New User</a></li>-->
+                 <li><a href="/add">New User</a></li>
              </ul>
              <div class ="card" style="background-color:whitesmoke">
                  <div class="card-body">
                      <div ><h4>All users</h4></div>
                  </div>
             </div>
- <div class="table-responcive" style="background-color:white">
-        <table class="table table-hover" id="table">
-        <tr>
-            <td><h5>Id</h5></td>
-            <td><h5>First Name</h5></td>
-            <td><h5>Last Name</h5></td>
-            <td><h5>Age</h5></td>
-            <td><h5>Email</h5></td>
-            <td><h5>Role</h5></td>
-            <td><h5>Edit</h5></td>
-            <td><h5>Delete</h5></td>
-        </tr>
-    <tr id="row" th:each="user : ${messages}">
-        <td id="id"th:text="${user.getId()}"></td>
-        <td id="name" th:text="${user.getName()}"></td>
-        <td id="lastname" th:text="${user.getLastName()}"></td>
-        <td id="age"th:text="${user.getAge()}"></td>
-        <td id="email" th:text="${user.getEmail()}"></td>
-        <td id="role"th:text="${user.getRoleString()}"></td>
-        <td><button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
-        <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
-    </tr>
-    </table>
+ <div class="table-responcive" style="background-color:white" >
+     <div id="tbl"></div>
+     <div id="prv"></div>
+     <!--    <table class="table table-hover" id="table">
+             <tbody id="data">
+         <tr>
+             <td><h5>Id</h5></td>
+             <td><h5>First Name</h5></td>
+             <td><h5>Last Name</h5></td>
+             <td><h5>Age</h5></td>
+             <td><h5>Email</h5></td>
+             <td><h5>Role</h5></td>
+             <td><h5>Edit</h5></td>
+             <td><h5>Delete</h5></td>
+         </tr>
+     <tr id="row" th:each="user : ${messages}">
+         <td id="id"th:text="${user.getId()}"></td>
+         <td id="name" th:text="${user.getName()}"></td>
+         <td id="lastname" th:text="${user.getLastName()}"></td>
+         <td id="age"th:text="${user.getAge()}"></td>
+         <td id="email" th:text="${user.getEmail()}"></td>
+         <td id="role"th:text="${user.getRoleString()}"></td>
+         <td><button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
+         <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
+     </tr>
+     </tbody>
+     </table>-->
      <div id="myModal" class="modal fade" >
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -100,19 +108,19 @@ width: 162px;
                         <form class="form-horizontal" id="form" >
                            <tr>
                                 <h6 align="center">Id</h6>
-                                <p align="center">  <input type="number" name="fid" id="fid" /></p>
+                                <p align="center">  <input type="number" name="fid" id="fid" readonly/></p>
                                 <h6 align="center"></h6>
                                 <h6 align="center">First Name</h6>
-                                <p align="center" >   <input name="name" type="text" id="fname" /></p>
+                                <p align="center" >   <input name="name" type="text" id="fname" readonly/></p>
                                 <h6 align="center">Last Name</h6>
-                                <p align="center"> <input name="lastName"type="text"id="flastname" /></p>
+                                <p align="center"> <input name="lastName"type="text"id="flastname" readonly/></p>
                                 <h6 align="center">Age</h6>
-                                <p align="center"> <input name="age" type="number" id="fage"/></p>
+                                <p align="center"> <input name="age" type="number" id="fage"readonly/></p>
                                 <h6 align="center">Email</h6>
-                                <p align="center"> <input name="email" type="email" id="femail"/></p>
+                                <p align="center"> <input name="email" type="email" id="femail"readonly/></p>
                                 <h6 align="center">Role</h6>
                             <div><p align="center">
-                                <select class="form-select" id="frole"  size="3" >
+                                <select class="form-select" id="frole"  size="3" readonly>
                                     <option  value="0">ADMIN</option>
                                     <option  value="1">USER</option>
                                     <option  value="2"></option>
@@ -145,7 +153,7 @@ width: 162px;
                           <form class="form-horizontal" id="eform"  method="PUT">
                             <tr>
                                   <h6 align="center">Id</h6>
-                                  <p align="center">  <input type="number" name="id" id="efid" required/></p>
+                                  <p align="center">  <input type="number" name="id" id="efid" readonly/></p>
                                   <h6 align="center"></h6>
                                   <h6 align="center">First Name</h6>
                                   <p align="center" >   <input name="name" type="text" id="efname" required/></p>
@@ -180,53 +188,6 @@ width: 162px;
             </div>
         </div>
     </div>
-     <div id="addModal" class="modal fade" >
-         <div class="modal-dialog modal-sm">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <button class="close" data-dismiss="modal">х</button>
-                     <h4 class="modal-title">Add User</h4>
-                 </div>
-                 <div class="modal-body">
-                     <div class="form-group">
-                         <form class="form-horizontal" id="addform" action="/admin" method="POST">
-                             <tr>
-                                 <h6 align="center">Id</h6>
-                                 <p align="center"><input type="number" name="id" id="addfid" required/></p>
-                                 <h6 align="center"></h6>
-                                 <h6 align="center">First Name</h6>
-                                 <p align="center" ><input name="name" type="text" id="addfname" required/></p>
-                                 <h6 align="center">Last Name</h6>
-                                 <p align="center"> <input name="lastname"type="text"id="addflastname" required/></p>
-                                 <h6 align="center">Age</h6>
-                                 <p align="center"> <input name="age" type="number" id="addfage"required/></p>
-                                 <h6 align="center">Email</h6>
-                                 <p align="center"> <input name="email" type="email" id="addfemail"required/></p>
-                                 <h6 align="center">Password</h6>
-                                 <p align="center"><input name="password"type="password"id="addfpassword" required/></p>
-                                 <h6 align="center">Role</h6>
-                                 <div><p align="center">
-                                     <select class="form-select" name="Role"  id="addfrole" size="3" required>
-                                         <option value="0">ADMIN</option>
-                                         <option value="1">USER</option>
-                                         <option value="2"></option>
-                                     </select></p>
-                                 </div>
-                             </tr>
-                         </form>
-                     </div>
-                 </div>
-                 <div class="modal-footer">
-                     <table align="right">
-                         <tr>
-                             <td><input class="btn btn-default" type="submit" value="Close" data-dismiss="modal"></td>
-                             <td><input class="btn btn-success addBtn" type="submit" id="add" value="Add" data-dismiss="modal"></td>
-                         </tr>
-                     </table>
-                 </div>
-             </div>
-         </div>
-     </div>
 <div class= "container">
 </div><div class="row">
 <div class="col-md-12" style="background-color:whitesmoke">
@@ -257,240 +218,270 @@ width: 162px;
     var  stredit ;
     var arrayedit = [];
 
-    $(function() {
-        $(document).ready(function () {
+    /*    function addTable() {
+            var myTableDiv = document.getElementById("tbl");
+            var table = document.createElement('TABLE');
+            table.border = '1';
+            table.className = 'tabl';
+            table.id = 'tabl';
+            var tableBody = document.createElement('TBODY');
+            table.appendChild(tableBody);
+            for (var i = 0; i < 7; i++) {
+                var tr = document.createElement('TR');
+                tableBody.appendChild(tr);
+                for (var j = 0; j < 8; j++) {
+                    var td = document.createElement('TD');
+                    td.width = '750';
+                   // td.appendChild(document.createTextNode("Cell " + i + "," + j));
+                    tr.appendChild(td);
+                }
+            }
+            myTableDiv.appendChild(table);
+        }
+    addTable();
+    $(document).ready(function () {
+        function changeTable() {
+            for (var row = 0; row < 5; row++) {
+                for (var col = 0; col < 8; col++) {
+                    if (row == 0 && col == 0) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Id";
+                    }
 
-            $('.delBtn').on('click', function () {
-                str = $(this).closest('tr').index();
-
-                $('.table tr').each(function () {
-                    var array_row = [];
-                    $(this).find('td').each(function () {
-                        array_row.push($(this).text());
-                    });
-                    array.push(array_row);
-                });
-                for (let i = 0; i < array.length; i++) {
-                    if (i === str) {
-                        $('p #fid').val(array[str][0]);
-                        $('p #fname').val(array[str][1]);
-                        $('p #flastname').val(array[str][2]);
-                        $('p #fage').val(array[str][3]);
-                        $('p #femail').val(array[str][4]);
-                        id = $('p #fid').val();
+                    if (row == 0 && col == 1) {
+                        $('.table').children().children()[row].children[col].innerHTML = "First Name";
+                    }
+                    if (row == 0 && col == 2) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Last Name";
+                    }
+                    if (row == 0 && col == 3) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Age";
+                    }
+                    if (row == 0 && col == 4) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Email";
+                    }
+                    if (row == 0 && col == 5) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Role";
+                    }
+                    if (row == 0 && col == 6) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Edit";
+                    }
+                    if (row == 0 && col == 7) {
+                        $('.table').children().children()[row].children[col].innerHTML = "Delete";
+                    }
+                    if (row > 0 && col == 6) {
+                        var btnedit = $('<button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button>');
+                        btnedit.appendTo($('.table').children().children()[row].children[col]);
+                    }
+                    if (row > 0 && col == 7) {
+                        var btndelit = $('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>');
+                        btndelit.appendTo($('.table').children().children()[row].children[col]);
                     }
                 }
-            });
-            $('.dBtn').on('click', function () {
-                $('.table tr').eq(str).remove();
-                fetch('/admin', {
-                    method: 'DELETE',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(id)
-                });
-            });
+            }
+        }
 
-            $('.edBtn').on('click', function () {
-                stredit = $(this).closest('tr').index();
+        changeTable();
+    });  */
+
+        $(function() {
+            $(document).ready(function () {
+                async function getUsers() {
+                    let responce = await fetch('/');
+                    let content = await responce.json();
+                    let list = document.querySelector('#prv');
+                    let key;
+                    list.innerHTML = `
+                          <table class="table ">
+                          <tr>
+                          <td>Id</p></td>
+                          <td>First Name</td>
+                          <td>Last Name</td>
+                          <td>Age</td>
+                          <td>Email</td>
+                          <td>Role</td>
+                          <td>Edit</td>
+                          <td>Delete</td>
+                          </tr>
+                          </table> `;
 
 
-                $('.table tr').each(function () {
-                    var array_row = [];
-                    $(this).find('td').each(function () {
-                        array_row.push($(this).text());
-                    });
-                    arrayedit.push(array_row);
-                });
-                for (let i = 0; i < arrayedit.length; i++) {
-                    if (i === stredit) {
-                        $('p #efid').val(arrayedit[stredit][0]);
-                        $('p #efname').val(arrayedit[stredit][1]);
-                        $('p #eflastname').val(arrayedit[stredit][2]);
-                        $('p #efage').val(arrayedit[stredit][3]);
-                        $('p #efemail').val(arrayedit[stredit][4]);
-                        $('p #efpassword').val(arrayedit[stredit][5]);
+                    let Role;
+                    for (key in content) {
+
+                        if (JSON.stringify(content[key].roles).length == 61) {
+                            Role = 'ADMIN';
+                        }
+                        if (JSON.stringify(content[key].roles).length == 59) {
+                            Role = 'USER';
+                        }
+                        if (JSON.stringify(content[key].roles).length == 119) {
+                            Role = 'ADMIN USER';
+                        } else {
+
+                        }
+                        list.innerHTML += ` <table class="table table-hover" id="table">
+                   <tr>
+                  <td>${content[key].id}</td>
+                  <td>${content[key].name}</td>
+                  <td>${content[key].lastName}</td>
+                  <td>${content[key].age}</td>
+                  <td>${content[key].email}</td>
+                  <td>${Role}</td>
+                  <td><p align="right"><button class="btn btn-info edBtn"  data-toggle="modal" data-target="#editModal">Edit</button></p></td>
+                  <td><p align="right"><button class="btn btn-danger delBtn"  data-toggle="modal" data-target="#myModal">Delete</button></p></td>
+                 </tr>
+                 </table>`;
                     }
                 }
-            });
 
+                getUsers();
 
-            $('.addBtn').on('click', function () {
-                $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+                //       });
 
-                var nr = $('#table tr:last').index();
+                //    $(document).ready(function () {
+                $('.table-hover ').on('click','.delBtn', function () {
+                    alert('Privet')
+                    str = $(this).closest('tr').index();
 
-                $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
-                $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
-                $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
-                $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
-                $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
-                $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
-                $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
-
-                 setTimeout(function() {window.location.reload();}, 300);
-                if ($('#addfrole option:selected').val() == 0) {
-                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
-                    var idrole = 1;
-                    var idname = 'ROLE_ADMIN';
-                    var user = [{
-                        id: $('#addfid').val(),
-                        name: $('#addfname').val(),
-                        lastName: $('#addflastname').val(),
-                        age: $('#addfage').val(),
-                        email: $('#addfemail').val(),
-                        password: $('#addfpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        }]
-                    }];
-                    fetch('/admin', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
+                    $('.table tr').each(function () {
+                        var array_row = [];
+                        $(this).find('td').each(function () {
+                            array_row.push($(this).text());
+                        });
+                        array.push(array_row);
                     });
-                }
-                if ($('#addfrole option:selected').val() == 1) {
-                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
-                    var idrole = 2;
-                    var idname = 'ROLE_USER';
-                    var user = [{
-                        id: $('#addfid').val(),
-                        name: $('#addfname').val(),
-                        lastName: $('#addflastname').val(),
-                        age: $('#addfage').val(),
-                        email: $('#addfemail').val(),
-                        password: $('#addfpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        }]
-                    }];
+                    for (let i = 0; i < array.length; i++) {
+                        if (i === str) {
+                            $('p #fid').val(array[str][0]);
+                            $('p #fname').val(array[str][1]);
+                            $('p #flastname').val(array[str][2]);
+                            $('p #fage').val(array[str][3]);
+                            $('p #femail').val(array[str][4]);
+                            id = $('p #fid').val();
+                        }
+                    }
+                });
+                $('.dBtn').on('click', function () {
+                    $('.table tr').eq(str).remove();
                     fetch('/admin', {
-                        method: 'POST',
+                        method: 'DELETE',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
+                        body: JSON.stringify(id)
                     });
-                }
-                if ($('#addfrole option:selected').val() == 2) {
-                    $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
-                    var idrole = 1;
-                    var idname = 'ROLE_ADMIN';
-                    var idrole1 = 2;
-                    var idname1 = 'ROLE_USER';
-                    var user = [{
-                        id: $('#addfid').val(),
-                        name: $('#addfname').val(),
-                        lastName: $('#addflastname').val(),
-                        age: $('#addfage').val(),
-                        email: $('#addfemail').val(),
-                        password: $('#addfpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        },
-                            {
-                                id: idrole1,
-                                name: idname1
+                });
+
+                $('.edBtn').on('click', function () {
+                    stredit = $(this).closest('tr').index();
+
+
+                    $('.table tr').each(function () {
+                        var array_row = [];
+                        $(this).find('td').each(function () {
+                            array_row.push($(this).text());
+                        });
+                        arrayedit.push(array_row);
+                    });
+                    for (let i = 0; i < arrayedit.length; i++) {
+                        if (i === stredit) {
+                            $('p #efid').val(arrayedit[stredit][0]);
+                            $('p #efname').val(arrayedit[stredit][1]);
+                            $('p #eflastname').val(arrayedit[stredit][2]);
+                            $('p #efage').val(arrayedit[stredit][3]);
+                            $('p #efemail').val(arrayedit[stredit][4]);
+                            $('p #efpassword').val(arrayedit[stredit][5]);
+                        }
+                    }
+                });
+
+
+                $('.editBtn').on('click', function () {
+
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
+                    $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
+
+                    if ($('#efrole option:selected').val() == 0) {
+                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
+                        var idrole = 1;
+                        var idname = 'ADMIN';
+
+                        var user = [{
+                            id: $('#efid').val(),
+                            name: $('#efname').val(),
+                            lastName: $('#eflastname').val(),
+                            age: $('#efage').val(),
+                            email: $('#efemail').val(),
+                            password: $('#efpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
                             }]
-                    }];
-                    fetch('/admin', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
-                    });
-                }
+                        }];
+                        fetch('/admin', {
+                            method: 'PUT',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
 
-            });
+                    if ($('#efrole option:selected').val() == 1) {
+                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+                        var idrole = 2;
+                        var idname = 'USER';
 
-            $('.editBtn').on('click', function () {
-
-                $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
-                $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
-                $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
-                $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
-                $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
-
-                if ($('#efrole option:selected').val() == 0) {
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
-                    var idrole = 1;
-                    var idname = 'ADMIN';
-
-                    var user = [{
-                        id: $('#efid').val(),
-                        name: $('#efname').val(),
-                        lastName: $('#eflastname').val(),
-                        age: $('#efage').val(),
-                        email: $('#efemail').val(),
-                        password: $('#efpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        }]
-                    }];
-                  fetch('/admin', {
-                        method: 'PUT',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
-                    });
-                }
-
-                if ($('#efrole option:selected').val() == 1) {
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
-                    var idrole = 2;
-                    var idname = 'USER';
-
-                    var user = [{
-                        id: $('#efid').val(),
-                        name: $('#efname').val(),
-                        lastName: $('#eflastname').val(),
-                        age: $('#efage').val(),
-                        email: $('#efemail').val(),
-                        password: $('#efpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        }]
-                    }];
-                    fetch('/admin', {
-                        method: 'PUT',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
-                    });
-                }
-                if ($('#efrole option:selected').val() == 2) {
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
-                    var idrole = 1;
-                    var idname = 'ROLE_ADMIN';
-                    var idrole1 = 2;
-                    var idname1 = 'ROLE_USER';
-
-                    var user = [{
-                        id: $('#efid').val(),
-                        name: $('#efname').val(),
-                        lastName: $('#eflastname').val(),
-                        age: $('#efage').val(),
-                        email: $('#efemail').val(),
-                        password: $('#efpassword').val(),
-                        roles: [{
-                            id: idrole,
-                            name: idname
-                        },
-                            {
-                                id: idrole1,
-                                name: idname1
+                        var user = [{
+                            id: $('#efid').val(),
+                            name: $('#efname').val(),
+                            lastName: $('#eflastname').val(),
+                            age: $('#efage').val(),
+                            email: $('#efemail').val(),
+                            password: $('#efpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
                             }]
-                    }];
-                    fetch('/admin', {
-                        method: 'PUT',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(user)
-                    });
-                }
-            });
+                        }];
+                        fetch('/admin', {
+                            method: 'PUT',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
+                    if ($('#efrole option:selected').val() == 2) {
+                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
+                        var idrole = 1;
+                        var idname = 'ROLE_ADMIN';
+                        var idrole1 = 2;
+                        var idname1 = 'ROLE_USER';
 
+                        var user = [{
+                            id: $('#efid').val(),
+                            name: $('#efname').val(),
+                            lastName: $('#eflastname').val(),
+                            age: $('#efage').val(),
+                            email: $('#efemail').val(),
+                            password: $('#efpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
+                            },
+                                {
+                                    id: idrole1,
+                                    name: idname1
+                                }]
+                        }];
+                        fetch('/admin', {
+                            method: 'PUT',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
+                });
+
+            });
         });
-    })
 
 </script>
 </body>

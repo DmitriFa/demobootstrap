@@ -55,7 +55,7 @@
         <h2 class="col-md-10">Admin panel</h2>
         <div class="col-md-10">
             <ul class="nav nav-tabs" role="tablist">
-                <li><a href="/admin" role="tab" data-toggle="tab">Users table</a></li>
+                <li><a href="/admin" >Users table</a></li>
                 <li class="active"><a href="#message" role="tab" data-toggle="tab">New User</a></li>
             </ul>
             <div class ="card" style="background-color:whitesmoke">
@@ -70,33 +70,35 @@
                                 <tr>
                                     <div>
                                         <h6 align ="center">First Name</h6>
-                                        <p align ="center"><input align ="center" name="name" type="text"id="name"required/></p>
+                                        <p align ="center"><input align ="center" name="name" type="text"id="addfname"required/></p>
                                     </div>
                                     <div>
                                         <h6 align ="center">Last Name</h6>
-                                        <p align ="center"><input name="lastName"type="text"id="lastName"required/></p>
+                                        <p align ="center"><input name="lastName"type="text"id="addflastName"required/></p>
                                     </div>
                                     <div>
                                         <h6 align ="center">Age</h6>
-                                        <p align ="center"><input name="age" type="number"id="age"required/></p>
+                                        <p align ="center"><input name="age" type="number"id="addfage"required/></p>
                                     </div>
                                     <div >
                                         <h6 align ="center">Email</h6>
-                                        <p align ="center"><input name="email" type="email"id="email"required/></p>
+                                        <p align ="center"><input name="email" type="email"id="addfemail"required/></p>
                                     </div>
                                     <div>
                                         <h6 align ="center">Password</h6>
-                                        <p align ="center"><input name="password"type="password"id="password"required/></p>
+                                        <p align ="center"><input name="password"type="password"id="addfpassword"required/></p>
                                     </div>
                                     <div>
                                         <h6 align="center">Role</h6>
-                                        <p align ="center"><select name="Role"   size ="3" required>
+                                        <p align ="center"><select name="Role" id="addfrole" size ="3" required>
                                             <option value="0">ADMIN</option>
                                             <option value="1">USER</option>
                                             <option value="2"></option>
                                         </select></p>
                                     </div>
-                                    <p align ="center"><a href="/add"/><button class="btn btn-success">Add new user</button></a></p>
+                                    <p align ="center"><a href="/admin"/><button class="btn btn-success">Add new user</button></p>
+                                <!--    <p align ="center"><a href="/admin" class="btn btn-success addBtn" type="submit">Add new user</a></p>-->
+                                 <!--   <p align="center"><input class="btn btn-success addBtn" type="submit" id="add" value="Add"></p>-->
                                 </tr>
                             </form>
                         </div>
@@ -106,5 +108,103 @@
         </div>
 </div>
 </div>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    "use strict";
+ /*   $(document).ready(function () {
+            $('.addBtn').on('click', function () {
+           //  $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+
+          //   var nr = $('#table tr:last').index();
+alert($('#addfemail').val());
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
+          //   $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
+           //  $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
+
+            //  setTimeout(function() {window.location.reload();}, 300);
+             if ($('#addfrole option:selected').val() == 0) {
+                // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
+                 var idrole = 1;
+                 var idname = 'ROLE_ADMIN';
+                 var user = [{
+                    // id: 0,
+                     name: $('#addfname').val(),
+                     lastName: $('#addflastname').val(),
+                     age: $('#addfage').val(),
+                     email: $('#addfemail').val(),
+                     password: $('#addfpassword').val(),
+                     roles: [{
+                         id: idrole,
+                         name: idname
+                     }]
+                 }];
+                 fetch('/admin', {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify(user)
+                 });
+             }
+             if ($('#addfrole option:selected').val() == 1) {
+               //  $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
+                 var idrole = 2;
+                 var idname = 'ROLE_USER';
+                 var user = [{
+                  //  id: 0,
+                     name: $('#addfname').val(),
+                     lastName: $('#addflastname').val(),
+                     age: $('#addfage').val(),
+                     email: $('#addfemail').val(),
+                     password: $('#addfpassword').val(),
+                     roles: [{
+                         id: idrole,
+                         name: idname
+                     }]
+                 }];
+                 fetch('/admin', {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify(user)
+                 });
+             }
+             if ($('#addfrole option:selected').val() == 2) {
+                // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
+                 var idrole = 1;
+                 var idname = 'ROLE_ADMIN';
+                 var idrole1 = 2;
+                 var idname1 = 'ROLE_USER';
+                 var user = [{
+                   //  id: 0,
+                     name: $('#addfname').val(),
+                     lastName: $('#addflastname').val(),
+                     age: $('#addfage').val(),
+                     email: $('#addfemail').val(),
+                     password: $('#addfpassword').val(),
+                     roles: [{
+                         id: idrole,
+                         name: idname
+                     },
+                         {
+                             id: idrole1,
+                             name: idname1
+                         }]
+                 }];
+                 fetch('/admin', {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify(user)
+                 });
+             }
+
+         });
+    });*/
+
+</script>
 </body>
 </html>
