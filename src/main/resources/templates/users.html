@@ -31,6 +31,25 @@ select{
 width: 162px;
 }
 
+table {
+    table-layout: fixed;
+}
+
+td:first-child {
+    width: 5%;
+}
+td:last-child {
+    width: 15%;
+}
+th:first-child {
+    width: 5%;
+}
+th:last-child {
+    width: 15%;
+}
+
+
+
 
 
 </style>
@@ -213,10 +232,10 @@ width: 162px;
 <script type="text/javascript">
     "use strict";
     var str;
-    var array = [];
+    //var array = [];
     var id;
     var  stredit ;
-    var arrayedit = [];
+  //  var arrayedit = [];
 
     /*    function addTable() {
             var myTableDiv = document.getElementById("tbl");
@@ -291,20 +310,19 @@ width: 162px;
                     let list = document.querySelector('#prv');
                     let key;
                     list.innerHTML = `
-                          <table class="table ">
+                          <table  class="table" id="zgl">
                           <tr>
-                          <td>Id</p></td>
-                          <td>First Name</td>
-                          <td>Last Name</td>
-                          <td>Age</td>
-                          <td>Email</td>
-                          <td>Role</td>
-                          <td>Edit</td>
-                          <td>Delete</td>
+                          <th>Id</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Age</th>
+                          <th>Email</th>
+                          <th>Role</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
                           </tr>
-                          </table> `;
-
-
+                          </tableborder>
+                          `;
                     let Role;
                     for (key in content) {
 
@@ -319,91 +337,78 @@ width: 162px;
                         } else {
 
                         }
-                        list.innerHTML += ` <table class="table table-hover" id="table">
-                   <tr>
+                        list.innerHTML += `<table  class="table table-hover" id="table">
+                  <tbody>
+                  <tr id ="${content[key].id}">
                   <td>${content[key].id}</td>
                   <td>${content[key].name}</td>
                   <td>${content[key].lastName}</td>
                   <td>${content[key].age}</td>
                   <td>${content[key].email}</td>
                   <td>${Role}</td>
-                  <td><p align="right"><button class="btn btn-info edBtn"  data-toggle="modal" data-target="#editModal">Edit</button></p></td>
-                  <td><p align="right"><button class="btn btn-danger delBtn"  data-toggle="modal" data-target="#myModal">Delete</button></p></td>
+                  <td align="right"><button class="btn btn-info edBtn"  data-toggle="modal" data-target="#editModal">Edit</button></td>
+                  <td align="right"><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
                  </tr>
+                 </tbody>
                  </table>`;
                     }
-                }
-
+                 //   $("#table tr").each(function() {
+                  //     console.log($(this).attr('id'));
+                   // });
+               }
                 getUsers();
 
-                //       });
+                //     });
 
-                //    $(document).ready(function () {
-                $('.table-hover ').on('click','.delBtn', function () {
-                    alert('Privet')
-                    str = $(this).closest('tr').index();
+                //  $(document).ready(function () {
 
-                    $('.table tr').each(function () {
-                        var array_row = [];
-                        $(this).find('td').each(function () {
-                            array_row.push($(this).text());
-                        });
-                        array.push(array_row);
-                    });
-                    for (let i = 0; i < array.length; i++) {
-                        if (i === str) {
-                            $('p #fid').val(array[str][0]);
-                            $('p #fname').val(array[str][1]);
-                            $('p #flastname').val(array[str][2]);
-                            $('p #fage').val(array[str][3]);
-                            $('p #femail').val(array[str][4]);
-                            id = $('p #fid').val();
-                        }
-                    }
-                });
+              $('body').on('click','.delBtn', function () {
+                  str = $(this).parent('td').parent('tr').attr('id');
+                  alert($('#'+str+'').text());
+                      var array = [];
+                      $('#'+str+'').find('td').each(function () {
+                          array.push($(this).text());
+                      });
+                          $('p #fid').val(array[0]);
+                          $('p #fname').val(array[1]);
+                          $('p #flastname').val(array[2]);
+                          $('p #fage').val(array[3]);
+                          $('p #femail').val(array[4]);
+              });
+           
+
                 $('.dBtn').on('click', function () {
-                    $('.table tr').eq(str).remove();
+                    $('#'+str+'').remove();
                     fetch('/admin', {
                         method: 'DELETE',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(id)
+                        body: JSON.stringify(str)
                     });
                 });
 
-                $('.edBtn').on('click', function () {
-                    stredit = $(this).closest('tr').index();
-
-
-                    $('.table tr').each(function () {
-                        var array_row = [];
-                        $(this).find('td').each(function () {
-                            array_row.push($(this).text());
-                        });
-                        arrayedit.push(array_row);
+                $('body').on('click','.edBtn',function () {
+                    stredit = $(this).parent('td').parent('tr').attr('id');
+                    alert($('#'+stredit+'').text());
+                    var arrayedit = [];
+                    $('#'+stredit+'').find('td').each(function () {
+                        arrayedit.push($(this).text());
                     });
-                    for (let i = 0; i < arrayedit.length; i++) {
-                        if (i === stredit) {
-                            $('p #efid').val(arrayedit[stredit][0]);
-                            $('p #efname').val(arrayedit[stredit][1]);
-                            $('p #eflastname').val(arrayedit[stredit][2]);
-                            $('p #efage').val(arrayedit[stredit][3]);
-                            $('p #efemail').val(arrayedit[stredit][4]);
-                            $('p #efpassword').val(arrayedit[stredit][5]);
-                        }
-                    }
+                    $('p #efid').val(arrayedit[0]);
+                    $('p #efname').val(arrayedit[1]);
+                    $('p #eflastname').val(arrayedit[2]);
+                    $('p #efage').val(arrayedit[3]);
+                    $('p #efemail').val(arrayedit[4]);
                 });
-
 
                 $('.editBtn').on('click', function () {
-
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(0)').text($('#efid').val());
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(1)').text($('#efname').val());
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(2)').text($('#eflastname').val());
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(3)').text($('#efage').val());
-                    $('.table tr:eq(' + stredit + ')').find('td:eq(4)').text($('#efemail').val());
+                    $('#'+stredit+'').find('td:eq(0)').text($('#efid').val());
+                    $('#'+stredit+'').find('td:eq(1)').text($('#efname').val());
+                    $('#'+stredit+'').find('td:eq(2)').text($('#eflastname').val());
+                    $('#'+stredit+'').find('td:eq(3)').text($('#efage').val());
+                    $('#'+stredit+'').find('td:eq(4)').text($('#efemail').val());
 
                     if ($('#efrole option:selected').val() == 0) {
-                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN');
+                        $('#'+stredit+'').find('td:eq(5)').text('ADMIN');
                         var idrole = 1;
                         var idname = 'ADMIN';
 
@@ -427,7 +432,7 @@ width: 162px;
                     }
 
                     if ($('#efrole option:selected').val() == 1) {
-                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('USER');
+                        $('#'+stredit+'').find('td:eq(5)').text('USER');
                         var idrole = 2;
                         var idname = 'USER';
 
@@ -450,7 +455,7 @@ width: 162px;
                         });
                     }
                     if ($('#efrole option:selected').val() == 2) {
-                        $('.table tr:eq(' + stredit + ')').find('td:eq(5)').text('ADMIN USER');
+                        $('#'+stredit+'').find('td:eq(5)').text('ADMIN USER');
                         var idrole = 1;
                         var idname = 'ROLE_ADMIN';
                         var idrole1 = 2;
