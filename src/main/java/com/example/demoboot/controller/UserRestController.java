@@ -31,11 +31,11 @@ import java.util.*;
             userService.updateUser(user[0]);
     }
 
-   /* @PostMapping(value = "/admin")
+  @PostMapping(value = "/admin")
     public void addUser(@RequestBody User[] user) {
         user[0].setRoles(user[0].getRoles());
         userService.addUser(user[0]);
-    }*/
+    }
 
    @GetMapping(value="/")
    public List<User> getUsers(){

@@ -66,7 +66,7 @@
                 <div class= "container-fluid">
                     <div class="row flex-cols">
                         <div class="col-md-12">
-                            <form name="myForm" th:action="@{/add}" th:method="post">
+                            <form name="myForm" action="/add" method="post">
                                 <tr>
                                     <div>
                                         <h6 align ="center">First Name</h6>
@@ -74,7 +74,7 @@
                                     </div>
                                     <div>
                                         <h6 align ="center">Last Name</h6>
-                                        <p align ="center"><input name="lastName"type="text"id="addflastName"required/></p>
+                                        <p align ="center"><input name="lastName"type="text"id="addflastname"required/></p>
                                     </div>
                                     <div>
                                         <h6 align ="center">Age</h6>
@@ -96,9 +96,9 @@
                                             <option value="2"></option>
                                         </select></p>
                                     </div>
-                                    <p align ="center"><a href="/admin"/><button class="btn btn-success">Add new user</button></p>
-                                <!--    <p align ="center"><a href="/admin" class="btn btn-success addBtn" type="submit">Add new user</a></p>-->
-                                 <!--   <p align="center"><input class="btn btn-success addBtn" type="submit" id="add" value="Add"></p>-->
+                                   <p align ="center"><a href="/admin"/><button class="btn btn-success">Add new user</button></p>
+                                    <!--    <p align ="center"><a href="/admin" class="btn btn-success addBtn" type="submit">Add new user</a></p>-->
+                                    <!--   <p align="center"><input class="btn btn-success addBtn" type="submit" id="add" value="Add"></p>-->
                                 </tr>
                             </form>
                         </div>
@@ -114,97 +114,105 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript">
     "use strict";
- /*   $(document).ready(function () {
-            $('.addBtn').on('click', function () {
-           //  $('#table').append('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+ /*   $(function() {
+        $(document).ready(function () {
+            $('body').on('click', '.addBtn', function () {
+                 // $('#table').append('<tr>Privet<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>Privet</td></tr>');
+                //   var nr = $('#table tr:last').index();
+                  //  alert($('#addfemail').val());
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
+                //   $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
+                //  $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
 
-          //   var nr = $('#table tr:last').index();
-alert($('#addfemail').val());
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(0)').text($('#addfid').val());
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(1)').text($('#addfname').val());
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(2)').text($('#addflastname').val());
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(3)').text($('#addfage').val());
-          //   $('.table tr:eq(' + nr + ')').find('td:eq(4)').text($('#addfemail').val());
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(6)').append($('<button class="btn btn-info edBtn" data-toggle="modal" data-target="#editModal">Edit</button>'));
-           //  $('.table tr:eq(' + nr + ')').find('td:eq(7)').append($('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>'));
+                  setTimeout(function() {window.location.reload();}, 300);
+                if ($('#addfrole option:selected').val() == 0) {
+                    // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
+                    var idrole = 1;
+                    var idname = 'ROLE_ADMIN';
+                    var user = [{
+                        // id: 0,
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/add', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+                if ($('#addfrole option:selected').val() == 1) {
+                    //  $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
+                    var idrole = 2;
+                    var idname = 'ROLE_USER';
+                    var user = [{
+                        //  id: 0,
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        }]
+                    }];
+                    fetch('/add', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+                if ($('#addfrole option:selected').val() == 2) {
+                    // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
+                    var idrole = 1;
+                    var idname = 'ROLE_ADMIN';
+                    var idrole1 = 2;
+                    var idname1 = 'ROLE_USER';
+                    var user = [{
+                        //  id: 0,
+                        name: $('#addfname').val(),
+                        lastName: $('#addflastname').val(),
+                        age: $('#addfage').val(),
+                        email: $('#addfemail').val(),
+                        password: $('#addfpassword').val(),
+                        roles: [{
+                            id: idrole,
+                            name: idname
+                        },
+                            {
+                                id: idrole1,
+                                name: idname1
+                            }]
+                    }];
+                    fetch('/add', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(user)
+                    });
+                }
+              //  document.location.href = "http://localhost:8088/admin";
+                 window.location = "http://localhost:8088/admin";
+                 setTimeout(function() {window.location.reload();}, 300);
+                // window.location.reload("http://localhost:8088/admin");
 
-            //  setTimeout(function() {window.location.reload();}, 300);
-             if ($('#addfrole option:selected').val() == 0) {
-                // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
-                 var idrole = 1;
-                 var idname = 'ROLE_ADMIN';
-                 var user = [{
-                    // id: 0,
-                     name: $('#addfname').val(),
-                     lastName: $('#addflastname').val(),
-                     age: $('#addfage').val(),
-                     email: $('#addfemail').val(),
-                     password: $('#addfpassword').val(),
-                     roles: [{
-                         id: idrole,
-                         name: idname
-                     }]
-                 }];
-                 fetch('/admin', {
-                     method: 'POST',
-                     headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify(user)
-                 });
-             }
-             if ($('#addfrole option:selected').val() == 1) {
-               //  $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
-                 var idrole = 2;
-                 var idname = 'ROLE_USER';
-                 var user = [{
-                  //  id: 0,
-                     name: $('#addfname').val(),
-                     lastName: $('#addflastname').val(),
-                     age: $('#addfage').val(),
-                     email: $('#addfemail').val(),
-                     password: $('#addfpassword').val(),
-                     roles: [{
-                         id: idrole,
-                         name: idname
-                     }]
-                 }];
-                 fetch('/admin', {
-                     method: 'POST',
-                     headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify(user)
-                 });
-             }
-             if ($('#addfrole option:selected').val() == 2) {
-                // $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
-                 var idrole = 1;
-                 var idname = 'ROLE_ADMIN';
-                 var idrole1 = 2;
-                 var idname1 = 'ROLE_USER';
-                 var user = [{
-                   //  id: 0,
-                     name: $('#addfname').val(),
-                     lastName: $('#addflastname').val(),
-                     age: $('#addfage').val(),
-                     email: $('#addfemail').val(),
-                     password: $('#addfpassword').val(),
-                     roles: [{
-                         id: idrole,
-                         name: idname
-                     },
-                         {
-                             id: idrole1,
-                             name: idname1
-                         }]
-                 }];
-                 fetch('/admin', {
-                     method: 'POST',
-                     headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify(user)
-                 });
-             }
 
-         });
+                //});
+
+               // getUsers();
+            });
+        });
     });*/
-
 </script>
 </body>
 </html>

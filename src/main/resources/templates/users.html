@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://java.sun.com/jsf/composite">
+
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -47,7 +48,11 @@ th:first-child {
 th:last-child {
     width: 15%;
 }
+.AClass{
+    position: relative;
+    top: -400px;
 
+}
 
 
 
@@ -78,43 +83,64 @@ th:last-child {
 <div class="col-md-10 flex-cols" >
          <h2 class="col-md-10 admin">Admin panel</h2>
          <div class="col-md-10">
+
              <ul class="nav nav-tabs" role="tablist">
-             <li class="active"><a href="#mesage" role="tab" data-toggle="tab">Users table</a></li>
-             <!--    <li><a data-toggle="modal" data-target="#addModal">New User</a></li>-->
-                 <li><a href="/add">New User</a></li>
-             </ul>
-             <div class ="card" style="background-color:whitesmoke">
-                 <div class="card-body">
-                     <div ><h4>All users</h4></div>
+                 <li class="nav-item "><a href="#allusers" role="tab" data-toggle="tab">Users table</a></li>
+                 <li class="nav-item"><a href="#adduser" role="tab" data-toggle="tab" >New User</a></li>
+                </ul>
+             <!--   <div class ="card" style="background-color:whitesmoke">
+                    <div class="card-body">-->
+
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active " id="allusers">
+                    <div><h4>All users</h4></div>
+                    <div class="table-responcive" style="background-color:white" >
+                        <div id="tbl"></div>
+                        <div id="prv"></div>
+                </div>
                  </div>
+                <div class="tab-pane fade " id="adduser">
+                 <div class="AClass">
+                 <form name="myForm"  method="post" >
+                        <tr>
+                            <div>
+                                <h6 align ="center">First Name</h6>
+                                <p align ="center"><input align ="center" name="name" type="text"id="addfname"required/></p>
+                            </div>
+                            <div>
+                                <h6 align ="center">Last Name</h6>
+                                <p align ="center"><input name="lastName"type="text"id="addflastname"required/></p>
+                            </div>
+                            <div>
+                                <h6 align ="center">Age</h6>
+                                <p align ="center"><input name="age" type="number"id="addfage"required/></p>
+                            </div>
+                            <div >
+                                <h6 align ="center">Email</h6>
+                                <p align ="center"><input name="email" type="email"id="addfemail"required/></p>
+                            </div>
+                            <div>
+                                <h6 align ="center">Password</h6>
+                                <p align ="center"><input name="password"type="password"id="addfpassword"required/></p>
+                            </div>
+                            <div>
+                                <h6 align="center">Role</h6>
+                                <p align ="center"><select name="Role" id="addfrole" size ="3" required>
+                                    <option value="0">ADMIN</option>
+                                    <option value="1">USER</option>
+                                    <option value="2"></option>
+                                </select></p>
+                            </div>
+                            <!-- <p align ="center"><button class="btn btn-success addBtn" >Add new user</button></p>-->
+                               <p align ="center"><a class="btn btn-success addBtn" type="submit">Add new user</a></p>
+                    </tr>
+                </form>
             </div>
- <div class="table-responcive" style="background-color:white" >
-     <div id="tbl"></div>
-     <div id="prv"></div>
-     <!--    <table class="table table-hover" id="table">
-             <tbody id="data">
-         <tr>
-             <td><h5>Id</h5></td>
-             <td><h5>First Name</h5></td>
-             <td><h5>Last Name</h5></td>
-             <td><h5>Age</h5></td>
-             <td><h5>Email</h5></td>
-             <td><h5>Role</h5></td>
-             <td><h5>Edit</h5></td>
-             <td><h5>Delete</h5></td>
-         </tr>
-     <tr id="row" th:each="user : ${messages}">
-         <td id="id"th:text="${user.getId()}"></td>
-         <td id="name" th:text="${user.getName()}"></td>
-         <td id="lastname" th:text="${user.getLastName()}"></td>
-         <td id="age"th:text="${user.getAge()}"></td>
-         <td id="email" th:text="${user.getEmail()}"></td>
-         <td id="role"th:text="${user.getRoleString()}"></td>
-         <td><button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button></td>
-         <td><button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
-     </tr>
-     </tbody>
-     </table>-->
+        </div>
+        </div>
+                        </div>
+                    </div>
      <div id="myModal" class="modal fade" >
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -235,82 +261,17 @@ th:last-child {
     //var array = [];
     var id;
     var  stredit ;
-  //  var arrayedit = [];
-
-    /*    function addTable() {
-            var myTableDiv = document.getElementById("tbl");
-            var table = document.createElement('TABLE');
-            table.border = '1';
-            table.className = 'tabl';
-            table.id = 'tabl';
-            var tableBody = document.createElement('TBODY');
-            table.appendChild(tableBody);
-            for (var i = 0; i < 7; i++) {
-                var tr = document.createElement('TR');
-                tableBody.appendChild(tr);
-                for (var j = 0; j < 8; j++) {
-                    var td = document.createElement('TD');
-                    td.width = '750';
-                   // td.appendChild(document.createTextNode("Cell " + i + "," + j));
-                    tr.appendChild(td);
-                }
-            }
-            myTableDiv.appendChild(table);
-        }
-    addTable();
-    $(document).ready(function () {
-        function changeTable() {
-            for (var row = 0; row < 5; row++) {
-                for (var col = 0; col < 8; col++) {
-                    if (row == 0 && col == 0) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Id";
-                    }
-
-                    if (row == 0 && col == 1) {
-                        $('.table').children().children()[row].children[col].innerHTML = "First Name";
-                    }
-                    if (row == 0 && col == 2) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Last Name";
-                    }
-                    if (row == 0 && col == 3) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Age";
-                    }
-                    if (row == 0 && col == 4) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Email";
-                    }
-                    if (row == 0 && col == 5) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Role";
-                    }
-                    if (row == 0 && col == 6) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Edit";
-                    }
-                    if (row == 0 && col == 7) {
-                        $('.table').children().children()[row].children[col].innerHTML = "Delete";
-                    }
-                    if (row > 0 && col == 6) {
-                        var btnedit = $('<button class="btn btn-info edBtn" id="edBtn" data-toggle="modal" data-target="#editModal">Edit</button>');
-                        btnedit.appendTo($('.table').children().children()[row].children[col]);
-                    }
-                    if (row > 0 && col == 7) {
-                        var btndelit = $('<button class="btn btn-danger delBtn" data-toggle="modal" data-target="#myModal">Delete</button>');
-                        btndelit.appendTo($('.table').children().children()[row].children[col]);
-                    }
-                }
-            }
-        }
-
-        changeTable();
-    });  */
 
         $(function() {
             $(document).ready(function () {
+             $('.nav-tabs a[href="#allusers"]').tab('show');
                 async function getUsers() {
                     let responce = await fetch('/');
                     let content = await responce.json();
                     let list = document.querySelector('#prv');
                     let key;
                     list.innerHTML = `
-                          <table  class="table" id="zgl">
+                          <table  class="table" id="table">
                           <tr>
                           <th>Id</th>
                           <th>First Name</th>
@@ -321,7 +282,7 @@ th:last-child {
                           <th>Edit</th>
                           <th>Delete</th>
                           </tr>
-                          </tableborder>
+                          </table>
                           `;
                     let Role;
                     for (key in content) {
@@ -352,19 +313,15 @@ th:last-child {
                  </tbody>
                  </table>`;
                     }
-                 //   $("#table tr").each(function() {
-                  //     console.log($(this).attr('id'));
-                   // });
                }
                 getUsers();
 
-                //     });
-
-                //  $(document).ready(function () {
+               function deleteTable(){
+                 $('#table tr').remove();
+               }
 
               $('body').on('click','.delBtn', function () {
                   str = $(this).parent('td').parent('tr').attr('id');
-                  alert($('#'+str+'').text());
                       var array = [];
                       $('#'+str+'').find('td').each(function () {
                           array.push($(this).text());
@@ -375,7 +332,6 @@ th:last-child {
                           $('p #fage').val(array[3]);
                           $('p #femail').val(array[4]);
               });
-           
 
                 $('.dBtn').on('click', function () {
                     $('#'+str+'').remove();
@@ -384,11 +340,13 @@ th:last-child {
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(str)
                     });
+                    deleteTable();
+                    setTimeout(function (){ getUsers();},300);
                 });
 
                 $('body').on('click','.edBtn',function () {
                     stredit = $(this).parent('td').parent('tr').attr('id');
-                    alert($('#'+stredit+'').text());
+                  //  alert($('#'+stredit+'').text());
                     var arrayedit = [];
                     $('#'+stredit+'').find('td').each(function () {
                         arrayedit.push($(this).text());
@@ -401,6 +359,22 @@ th:last-child {
                 });
 
                 $('.editBtn').on('click', function () {
+               /*     let list = document.querySelector('#tbl');
+                    var tch = document.querySelectorAll('.table  tr');
+                    var array = [];
+                    [].forEach.call(tch, function(tr) {
+                        array.push(tr.cells[4].textContent);
+                    });
+                    for (var i = 0; i < array.length; i++) {
+                        if(array[i] === $('#efemail').val()){
+                            list.innerHTML='USER EXISTS';
+                            $('.nav-tabs a[href="#allusers"]').tab('show');
+                            return;
+                        }
+                        else{
+                        }
+                    }*/
+
                     $('#'+stredit+'').find('td:eq(0)').text($('#efid').val());
                     $('#'+stredit+'').find('td:eq(1)').text($('#efname').val());
                     $('#'+stredit+'').find('td:eq(2)').text($('#eflastname').val());
@@ -483,9 +457,106 @@ th:last-child {
                             body: JSON.stringify(user)
                         });
                     }
+                    deleteTable();
+                    setTimeout(function (){ getUsers();},300);
                 });
 
+               $('body').on('click', '.addBtn', function () {
+                   let list = document.querySelector('#tbl');
+                   var tch = document.querySelectorAll('.table  tr');
+                   var array = [];
+                   [].forEach.call(tch, function(tr) {
+                       array.push(tr.cells[4].textContent);
+                   });
+                   for (var i = 0; i < array.length; i++) {
+                       if(array[i] === $('#addfemail').val()){
+                           list.innerHTML='USER EXISTS';
+                           $('.nav-tabs a[href="#allusers"]').tab('show');
+                          return;
+                       }
+                       else{
+                       }
+                   }
+
+                    if ($('#addfrole option:selected').val() == 0) {
+                      //   $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN');
+                        var idrole = 1;
+                        var idname = 'ROLE_ADMIN';
+                        var user = [{
+                            // id: 0,
+                            name: $('#addfname').val(),
+                            lastName: $('#addflastname').val(),
+                            age: $('#addfage').val(),
+                            email: $('#addfemail').val(),
+                            password: $('#addfpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
+                            }]
+                        }];
+                        fetch('/admin', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
+                    if ($('#addfrole option:selected').val() == 1) {
+                        //  $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('USER');
+                        var idrole = 2;
+                        var idname = 'ROLE_USER';
+                        var user = [{
+                            //  id: 0,
+                            name: $('#addfname').val(),
+                            lastName: $('#addflastname').val(),
+                            age: $('#addfage').val(),
+                            email: $('#addfemail').val(),
+                            password: $('#addfpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
+                            }]
+                        }];
+                        fetch('/admin', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
+                    if ($('#addfrole option:selected').val() == 2) {
+                      //   $('.table tr:eq(' + nr + ')').find('td:eq(5)').text('ADMIN USER');
+                        var idrole = 1;
+                        var idname = 'ROLE_ADMIN';
+                        var idrole1 = 2;
+                        var idname1 = 'ROLE_USER';
+                        var user = [{
+                            //  id: 0,
+                            name: $('#addfname').val(),
+                            lastName: $('#addflastname').val(),
+                            age: $('#addfage').val(),
+                            email: $('#addfemail').val(),
+                            password: $('#addfpassword').val(),
+                            roles: [{
+                                id: idrole,
+                                name: idname
+                            },
+                                {
+                                    id: idrole1,
+                                    name: idname1
+                                }]
+                        }];
+                        fetch('/admin', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user)
+                        });
+                    }
+                   deleteTable();
+                   setTimeout(function (){ getUsers();},300);
+                   loop:
+                   $('.nav-tabs a[href="#allusers"]').tab('show');
+                    });
             });
+
         });
 
 </script>

@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-
+ /*
     @GetMapping(value = "/add")
        public String addUser(ModelMap model) throws Exception {
        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,7 +32,7 @@ public class UserController {
        return "add";
     }
 
-  /* @RequestMapping(value = "/admin", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public ModelAndView deleteUser(@ModelAttribute("user") User user) {
        ModelAndView modelAndView = new ModelAndView();
         userService.removeUser(user);
@@ -50,7 +50,7 @@ public class UserController {
     }*/
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+ /*   @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView adduser(@ModelAttribute("user") User user, @RequestParam("Role") String[] role) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         if (role[0].equals("0")) {
