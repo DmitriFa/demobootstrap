@@ -359,21 +359,21 @@ th:last-child {
                 });
 
                 $('.editBtn').on('click', function () {
-               /*     let list = document.querySelector('#tbl');
+                   let list = document.querySelector('#tbl');
                     var tch = document.querySelectorAll('.table  tr');
                     var array = [];
                     [].forEach.call(tch, function(tr) {
                         array.push(tr.cells[4].textContent);
                     });
                     for (var i = 0; i < array.length; i++) {
-                        if(array[i] === $('#efemail').val()){
+                        if(array[i] === $('#efemail').val()& $('#'+stredit+'').find('td:eq(4)').text()!==$('#efemail').val()){
                             list.innerHTML='USER EXISTS';
                             $('.nav-tabs a[href="#allusers"]').tab('show');
                             return;
                         }
-                        else{
+                        else{list.innerHTML='';
                         }
-                    }*/
+                    }
 
                     $('#'+stredit+'').find('td:eq(0)').text($('#efid').val());
                     $('#'+stredit+'').find('td:eq(1)').text($('#efname').val());
@@ -475,6 +475,7 @@ th:last-child {
                           return;
                        }
                        else{
+                           list.innerHTML='';
                        }
                    }
 
